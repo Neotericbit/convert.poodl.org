@@ -246,7 +246,7 @@ const wagmiConfig = createConfig({
 
         var payableAmount = toWei(amount, decimals); 
 
-        await processTx( PoodlReferralContractAddress, memberShipRefCodeABI, config.method, Array(), payableAmount, explorerURL );
+        await processTx( PoodlReferralContractAddress, memberShipRefCodeABI, config.method, Array(payableAmount), 0, explorerURL );
 
         alertify.alert("Transaction Success !!" , fundType + " fund added");
 
