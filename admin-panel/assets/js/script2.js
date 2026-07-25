@@ -219,9 +219,9 @@ const wagmiConfig = createConfig({
     //==============  ADD Funds ================
 
     var addFundConfig = {
-        gift:       { input: '#txtAddGift',   method: 'addGiftFund' },
+        gift:       { input: '#txtAddGift',   method: 'addgiftFund' },
         reward:     { input: '#txtAddReward', method: 'addRewardFund' },
-        commission: { input: '#txtAddComm',   method: 'addCommissionFund' }
+        commission: { input: '#txtAddComm',   method: 'addcommissionFund' }
     };
 
     $('.addfund').click(async function(){
