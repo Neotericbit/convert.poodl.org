@@ -1,0 +1,503 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/png" href="assets/img/poodl.png" />
+    <title>POODL | Packages Details</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&display=swap"
+      rel="stylesheet"
+    />
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="assets/css/font-awesome.min.css" />
+    <link rel="stylesheet" href="assets/css/style.css?v=1.5" />
+    <link rel="stylesheet" href="assets/css/alertify.min.css" />
+    <style>
+      .white,
+      .white:focus,
+      .white:hover {
+        color: #fff;
+      }
+      .social-media li a {
+        color: #fff;
+        font-size: 25px;
+        padding: 0px 10px;
+      }
+      .footer .footer-inner {
+        max-width: 1200px;
+        width: 100%;
+        margin: auto;
+        padding: 15px;
+      }
+
+      .footer ul li.dropdown a i {
+        font-size: 26px;
+      }
+      .footer ul li.dropdown .dropdown-menu a {
+        font-size: 14px;
+        text-align: center;
+      }
+      .footer ul li.dropdown a span {
+        margin: 0 20px;
+        font-size: 14px;
+      }
+      .card {
+        background: #f2f2f2;
+        align-items: center;
+        margin: auto;
+        position: relative;
+        box-sizing: border-box;
+        background-clip: padding-box;
+        border: solid 5px transparent;
+        padding: 5px;
+        border-radius: 1em;
+      }
+      .card::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        margin: -5px;
+        background: linear-gradient(
+          135deg,
+          #614dfe 0%,
+          #52fa9a 30%,
+          #ffff00 60%,
+          #cf002e 100%
+        ) !important;
+        z-index: -1;
+        border-radius: 10px;
+      }
+
+      .table {
+        border: none;
+        box-shadow: none;
+        background-color: #ffffff;
+        margin-bottom: 0;
+      }
+      .nav-pills .nav-link {
+        border-radius: 0.25rem;
+        background-color: #0062cc;
+        color: #fff;
+        border: none;
+      }
+
+      #btnwithdraw {
+        background: linear-gradient(
+          90deg,
+          rgb(7, 164, 254),
+          rgb(236, 2, 40) 95.07%
+        ) !important;
+        color: #fff;
+      }
+
+      .button {
+        padding: 0px 15px 1px;
+        height: 40px;
+        border-radius: var(--w3m-button-border-radius);
+        color: #ffffff;
+        background-color: #000;
+        cursor: pointer;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: relative;
+        border: none;
+        transition: 0.2s;
+        border-radius: 10px;
+      }
+
+      .button {
+        padding: 0px 15px 1px;
+        height: 40px;
+        border-radius: var(--w3m-button-border-radius);
+        color: #ffffff;
+        background-color: #000;
+        cursor: pointer;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: relative;
+        border: none;
+        transition: 0.2s;
+        border-radius: 10px;
+      }
+      .navbar-light .navbar-nav .nav-link.details-p {
+        font-size: 16px;
+        background-color: black;
+        color: #fff;
+        border: none;
+        border-radius: 10px;
+        padding: 8px 15px;
+        margin-right: 15px;
+      }
+
+      @media (max-width: 768px) {
+        .card {
+          margin-bottom: 20px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <nav class="navbar navbar-expand-md navbar-light">
+        <a class="navbar-brand logo" href="index.html">
+          <img
+            src="assets/img/poodl_white1.png"
+            alt="Logo"
+            srcset=""
+            style="width: 80px"
+          />
+        </a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-toggle="collapse"
+          data-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <!--<span class="navbar-toggler-icon" style="filter: invert(100%) sepia(2%) saturate(7439%) hue-rotate(189deg) brightness(117%) contrast(92%);"></span>-->
+          <i class="fa fa-bars" aria-hidden="true"></i>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+              <a
+                href="index.html"
+                class="btn btn-outline-danger"
+                style="
+                  background: linear-gradient(
+                    90deg,
+                    rgb(236, 2, 40),
+                    rgb(7, 164, 254) 95.07%
+                  ) !important;
+                  color: #fff;
+                "
+                >Home</a
+              >
+              <!-- <a class="nav-link btn btn-primary btn-sm details-p" href="index.html">Home</a> -->
+            </li>
+            <li class="nav-item">
+              <div style="margin-top: 0px">
+                <w3m-network-switch></w3m-network-switch>
+              </div>
+            </li>
+            <li class="nav-item">
+              <div style="margin-top: 0px">
+                <w3m-core-button></w3m-core-button>
+              </div>
+              <!-- <button class="btn btn-outline-primary btn-sm" style="display: none;margin-top: 15px;" id="logout">Logout</button> -->
+            </li>
+          </ul>
+        </div>
+      </nav>
+    </header>
+    <!-- <div class="container-heder bg-light p-3"> -->
+    <div class="container mt-5">
+      <div class="row">
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 text-center">
+          <h1 class="demo-title mb-5">Membership Packages Details</h1>
+          <h4></h4>
+        </div>
+      </div>
+    </div>
+    <!-- </div> -->
+    <div class="container my-5 height-min">
+      <div class="row">
+        <div class="col-sm-6">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">Total Stake Amount</h5>
+              <br />
+              <h2 class="card-text" id="totalStakedCoins">0.0000 POODL</h2>
+            </div>
+          </div>
+          <div class="Stake_More_Btn text-center my-3">
+            <a
+              class="btn btn-outline-danger staking-pink"
+              href="https://members.poodl.org"
+              role="button"
+              target="_blank"
+              >Stake More</a
+            >
+          </div>
+        </div>
+        <div class="col-sm-6">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">Reward Amount</h5>
+              <br />
+              <div class="row">
+                <div class="col text-left py-2">
+                  <h5 class="" id="rewardAmount" style="font-size: 18px">
+                    0.0000 POODL
+                  </h5>
+                </div>
+                <div class="col text-right">
+                  <button
+                    class="btn btn-outline-danger staking-pink"
+                    type="button"
+                    style="width: max-content"
+                    id="btnwithdraw"
+                    fdprocessedid="aushb"
+                  >
+                    Withdraw Rewards
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="Stake_More_Btn text-center my-3">
+            <a
+              class="btn btn-outline-primary staking-pink"
+              href="https://poodl.org/"
+              role="button"
+              target="_blank"
+              >Tips To Earn More</a
+            >
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <div class="title py-3">
+            <h2>History</h2>
+          </div>
+        </div>
+        <div class="col-md-12">
+          <ul
+            class="nav nav-pills mb-3"
+            id="pills-tab"
+            role="tablist"
+            style="border-bottom: 2px solid #0ea0f8"
+          >
+            <li class="nav-item" role="presentation">
+              <button
+                class="nav-link active"
+                id="pills-stake-tab"
+                data-toggle="pill"
+                data-target="#pills-stake"
+                type="button"
+                role="tab"
+                aria-controls="pills-stake"
+                aria-selected="true"
+              >
+                Stake
+              </button>
+            </li>
+            <li class="nav-item ml-2" role="presentation">
+              <button
+                class="nav-link"
+                id="pills-reward-tab"
+                data-toggle="pill"
+                data-target="#pills-reward"
+                type="button"
+                role="tab"
+                aria-controls="pills-reward"
+                aria-selected="false"
+              >
+                Bonus
+              </button>
+            </li>
+            <li class="nav-item ml-2" role="presentation">
+              <button
+                class="nav-link"
+                id="pills-commission-tab"
+                data-toggle="pill"
+                data-target="#pills-commission"
+                type="button"
+                role="tab"
+                aria-controls="pills-commission"
+                aria-selected="false"
+              >
+                Claim Commission
+              </button>
+            </li>
+   
+          </ul>
+           
+          <!-- <button id="readBtn">Read</button> -->
+
+          <h5 class="nav-link" id="total-commission-tab"></h5>
+          <input type="hidden" id="hPurIds" name="" />
+          <div class="tab-content" id="pills-tabContent">
+            <div
+              class="tab-pane fade show active"
+              id="pills-stake"
+              role="tabpanel"
+              aria-labelledby="pills-stake-tab"
+            >
+              <div class="stak-table card">
+                <table class="table">
+                  <thead>
+                    <tr>
+                      <th scope="col">Package Name</th>
+                      <th scope="col">Stake Amount</th>
+                      <th scope="col">Gift Amount</th>
+                      <th scope="col">Transaction</th>
+                    </tr>
+                  </thead>
+                  <tbody id="stakingsTxTable">
+                    <tr>
+                      <th scope="row"></th>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            <div
+              class="tab-pane fade"
+              id="pills-reward"
+              role="tabpanel"
+              aria-labelledby="pills-reward-tab"
+            >
+              <div class="stak-table card">
+                <table class="table">
+                  <thead>
+                    <tr>
+                      <th scope="col">Bonus Amount</th>
+                      <th scope="col">Claimed Bonus Amount</th>
+                      <th scope="col"> </th>
+                    </tr>
+                  </thead>
+                  <tbody id="bonusTable">
+                    <tr>
+                      <td></td>
+                      <td></td>
+                      <td>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            <div
+              class="tab-pane fade"
+              id="pills-commission"
+              role="tabpanel"
+              aria-labelledby="pills-commission-tab"
+            >
+              <div class="stak-table card">
+                <table class="table">
+                  <thead>
+                    <tr>
+                      <th scope="col">Commission Amount</th>
+                      <!-- <th scope="col">date and time</th> -->
+                      <th scope="col">Transaction</th>
+                      <!-- <th scope="col">date and time</th> -->
+                    </tr>
+                  </thead>
+                  <tbody id="commissionTable">
+                    <tr>
+                      <td></td>
+                      <td></td>
+                      <!-- <td></td>
+                      <td></td> -->
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+           
+
+          </div>
+        </div>
+      </div>
+    </div>
+    <footer class="footer">
+      <div class="footer-inner">
+        <div class="row">
+          <div class="col-md-6 col-sm-6">
+            <a class="white" href="">Terms of Use</a>
+            <p class="m-0">
+              © 2024 <span class="NETWORK_NAME">POODL</span> All rights
+              reserved.
+            </p>
+          </div>
+          <div class="col-md-6 col-sm-6">
+            <ul class="nav justify-content-end social-media">
+              <!-- <li class="nav-item">
+							<a class="nav-link social-github" href="https://github.com" target="_blank"><i class="fa fa-github" aria-hidden="true"></i></a>
+					  </li> -->
+              <li class="nav-item">
+                <a
+                  class="nav-link social-twitter"
+                  href="https://twitter.com/poodlchain"
+                  target="_blank"
+                  ><i class="fa fa-twitter" aria-hidden="true"></i
+                ></a>
+              </li>
+              <li class="nav-item">
+                <a
+                  class="nav-link social-telegram"
+                  href="https://t.me/Poodl"
+                  target="_blank"
+                  ><i class="fa fa-telegram" aria-hidden="true"></i
+                ></a>
+              </li>
+              <li class="nav-item">
+                <a
+                  class="nav-link social-facebook"
+                  href="https://www.facebook.com/share/E7Y89Vi5ZVU1wN2n/?mibextid=LQQJ4d"
+                  ><i class="fa fa-facebook" aria-hidden="true"></i
+                ></a>
+              </li>
+              <li class="nav-item">
+                <a
+                  class="nav-link social-youtube"
+                  href="https://youtube.com/@PoodlChain?feature=shared"
+                  ><i class="fa fa-youtube" aria-hidden="true"></i
+                ></a>
+              </li>
+              <li class="nav-item">
+                <a
+                  class="nav-link social-whatsapp"
+                  href="https://whatsapp.com/channel/0029VacFfecAjPXTScacGm2I"
+                  ><i class="fa fa-whatsapp" aria-hidden="true"></i
+                ></a>
+              </li>
+              <!-- <li class="nav-item dropdown">
+				        <a class="nav-link dropdown-toggle bTTabq" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+				          <i class="fa fa-globe" aria-hidden="true"></i> <span>English</span>
+				        </a>
+				        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+				          <a class="dropdown-item" href="#">English</a>
+
+				        </div>
+				      </li> -->
+            </ul>
+          </div>
+        </div>
+      </div>
+    </footer>
+    <!-- Bootstrap -->
+    <script src="assets/js/jquery-3.5.1.slim.min.js"></script>
+    <script src="assets/js/popper.min.js"></script>
+    <script src="assets/js/bootstrap.min.js"></script>
+    <!-- Web3 -->
+    <!-- <script src="https://cdn.jsdelivr.net/gh/ethereum/web3.js@3.0.0/dist/web3.min.js"></script>		 -->
+    <!-- <script src="https://cdn.jsdelivr.net/gh/ethereum/web3.js@3.0.0/dist/web3.min.js"></script> -->
+    <!-- <script src="https://cdn.jsdelivr.net/npm/web3@latest/dist/web3.min.js"></script> -->
+    <script src="assets/js/alertify.js"></script>
+    <script src="assets/js/general.js?v=0.0.3"></script>
+    <script>
+      // Required by some npm packages
+      window.process = { browser: true, env: { ENVIRONMENT: "BROWSER" } };
+    </script>
+    <script src="assets/js/details.js?v=0.0.3" type="module"></script>
+  </body>
+</html>

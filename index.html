@@ -1,0 +1,1437 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/png" href="assets/img/poodl.png" />
+    <title>POODL Packages</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&display=swap"
+      rel="stylesheet"
+    />
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="assets/css/font-awesome.min.css" />
+    <link rel="stylesheet" href="assets/css/style.css?v=1.5" />
+    <link rel="stylesheet" href="assets/css/alertify.min.css" />
+    <style>
+      h1.demo-title {
+        text-align: center;
+        font-size: 30px;
+        font-weight: 600;
+        color: #2a293e;
+        letter-spacing: 2px;
+      }
+
+      h1.demo-title a {
+        font-size: 16px;
+        font-weight: 300;
+      }
+
+      .pricing-table {
+        display: flex;
+        flex-flow: row wrap;
+        width: 100%;
+        max-width: 1100px;
+        margin: 0 auto;
+        background: #ffffff;
+      }
+
+      .pricing-table .ptable-item {
+        width: 33.33%;
+        padding: 0 15px;
+        margin-bottom: 30px;
+      }
+      .refCode {
+        display: inline;
+        width: 50%;
+      }
+      @media (max-width: 992px) {
+        .pricing-table .ptable-item {
+          width: 33.33%;
+        }
+      }
+
+      @media (max-width: 768px) {
+        .pricing-table .ptable-item {
+          width: 50%;
+        }
+      }
+
+      @media (max-width: 576px) {
+        .pricing-table .ptable-item {
+          width: 100%;
+        }
+        .footer .footer-inner {
+          text-align: center;
+        }
+        .justify-content-end {
+          -ms-flex-pack: end !important;
+          justify-content: center !important;
+        }
+      }
+
+      .pricing-table .ptable-single {
+        position: relative;
+        width: 100%;
+        /* overflow: hidden; */
+      }
+
+      .pricing-table .ptable-header,
+      .pricing-table .ptable-body,
+      .pricing-table .ptable-footer {
+        position: relative;
+        width: 100%;
+        text-align: center;
+        overflow: hidden;
+      }
+
+      .pricing-table .ptable-status,
+      .pricing-table .ptable-title,
+      .pricing-table .ptable-price,
+      .pricing-table .ptable-description,
+      .pricing-table .ptable-action {
+        position: relative;
+        width: 100%;
+        text-align: center;
+      }
+
+      .pricing-table .ptable-single {
+        background: #f6f8fa;
+        position: relative;
+        border: 5px solid transparent;
+        background: #f2f2f2;
+        background-clip: padding-box;
+        border-radius: 10px;
+
+        /* display: flex; */
+        align-items: center;
+        margin: auto;
+        position: relative;
+        box-sizing: border-box;
+        background-clip: padding-box;
+        border: solid 5px transparent;
+        padding: 0px;
+        border-radius: 1em;
+        box-shadow:
+          0 12px 0 rgba(0, 0, 0, 0.22),
+          0 18px 26px rgba(0, 0, 0, 0.28),
+          inset 0 0 18px rgba(255, 255, 255, 0.25);
+      }
+
+      .pricing-table .ptable-single::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        margin: -5px;
+        background: linear-gradient(
+          135deg,
+          #614dfe 0%,
+          #52fa9a 30%,
+          #ffff00 60%,
+          #cf002e 100%
+        ) !important;
+        z-index: 0;
+        border-radius: 10px;
+      }
+
+      .pricing-table .ptable-single:hover {
+        box-shadow: 0 0 10px #999999;
+      }
+
+      .pricing-table .ptable-header {
+        /* margin: 0 30px; */
+        /* padding: 30px 0 45px 0; */
+        padding: 15px 0 20px 0;
+        width: auto;
+        background: #2a293e;
+        border-radius: 0.25rem 0.25rem 0 0;
+      }
+
+      .pricing-table .ptable-header::before,
+      .pricing-table .ptable-header::after {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        width: 0;
+        height: 0;
+        border-bottom: 100px solid #f6f8fa;
+      }
+
+      .pricing-table .ptable-header::before {
+        right: 50%;
+        border-right: 250px solid transparent;
+      }
+
+      .pricing-table .ptable-header::after {
+        left: 50%;
+        border-left: 250px solid transparent;
+      }
+
+      /* .pricing-table .ptable-item.featured-item .ptable-header {
+        background: #ec0228;
+      }
+
+      .pricing-table .ptable-item.featured-item-2 .ptable-header {
+        background: #1997ed;
+      } */
+
+      .pricing-table .ptable-status {
+        margin-top: -30px;
+      }
+
+      .pricing-table .ptable-status span {
+        position: relative;
+        display: inline-block;
+        width: 50px;
+        height: 30px;
+        padding: 5px 0;
+        text-align: center;
+        color: #ec0228;
+        font-size: 14px;
+        font-weight: 300;
+        letter-spacing: 1px;
+        background: #2a293e;
+      }
+
+      .pricing-table .ptable-status span::before,
+      .pricing-table .ptable-status span::after {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        width: 0;
+        height: 0;
+        border-bottom: 10px solid #ec0228;
+      }
+
+      .pricing-table .ptable-status span::before {
+        right: 50%;
+        border-right: 25px solid transparent;
+      }
+
+      .pricing-table .ptable-status span::after {
+        left: 50%;
+        border-left: 25px solid transparent;
+      }
+
+      .pricing-table .ptable-title h2 {
+        color: #ffffff;
+        font-size: 18px;
+        font-weight: 500;
+        letter-spacing: 2px;
+      }
+
+      .pricing-table .ptable-price h2 {
+        margin: 0;
+        color: #ffffff;
+        font-size: 24px;
+        font-weight: 700;
+        /* margin-left: 15px; */
+      }
+
+      .pricing-table .ptable-price h2 small {
+        position: absolute;
+        font-size: 18px;
+        font-weight: 300;
+        margin-top: 16px;
+        margin-left: -15px;
+      }
+
+      .pricing-table .ptable-price span {
+        font-size: 16px;
+        font-weight: 300;
+        color: #ffffff;
+      }
+
+      .pricing-table .ptable-body {
+        padding: 20px 0;
+        background-color: #f6f8fa;
+      }
+
+      .pricing-table .ptable-description ul {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+      }
+
+      .pricing-table .ptable-description ul li {
+        color: #2a293e;
+        font-size: 14px;
+        font-weight: 500;
+        letter-spacing: 1px;
+        padding: 7px;
+        border-bottom: 1px solid #dedede;
+      }
+
+      .pricing-table .ptable-description ul li:last-child {
+        border: none;
+      }
+
+      .pricing-table .ptable-footer {
+        padding-bottom: 20px;
+        background-color: #f6f8fa;
+        border-radius: 0 0 0.25rem 0.25rem;
+      }
+
+      .pricing-table .ptable-action a {
+        border: none;
+        color: #ffffff;
+        font-size: 14px;
+        font-weight: 800;
+        letter-spacing: 0.4px;
+        padding: 10px 18px;
+        border-radius: 9px;
+        background: linear-gradient(
+          90deg,
+          rgb(7, 164, 254),
+          rgb(236, 2, 40) 95.07%
+        ) !important;
+        cursor: pointer;
+        transition: 0.2s ease;
+      }
+
+      .pricing-table .ptable-action a:hover {
+        color: #ffffff;
+      }
+      .white,
+      .white:focus,
+      .white:hover {
+        color: #fff;
+      }
+      .social-media li a {
+        color: #fff;
+        font-size: 25px;
+        padding: 0px 10px;
+      }
+      .footer .footer-inner {
+        max-width: 1200px;
+        width: 100%;
+        margin: auto;
+        padding: 15px;
+      }
+
+      .footer ul li.dropdown a i {
+        font-size: 26px;
+      }
+      .footer ul li.dropdown .dropdown-menu a {
+        font-size: 14px;
+        text-align: center;
+      }
+      .footer ul li.dropdown a span {
+        margin: 0 20px;
+        font-size: 14px;
+      }
+      .pb-76 {
+        padding-bottom: 56px !important;
+      }
+      .pb-41 {
+        padding-bottom: 41px !important;
+      }
+      .silver {
+        background: silver !important;
+      }
+      .silver .ptable-title h2 {
+        color: #000;
+      }
+      .silver .ptable-price h2,
+      span {
+        color: #000;
+      }
+      .gold {
+        background: #ffd700 !important;
+      }
+      .gold .ptable-title h2 {
+        color: #000;
+      }
+      .gold .ptable-price h2,
+      span {
+        color: #000;
+      }
+      .premier {
+        background: #0aa1fa !important;
+      }
+      .platinum {
+        background-color: #584f3f !important;
+      }
+      .diamond {
+        background-color: #b9f2ff !important;
+      }
+      .diamond .ptable-title h2 {
+        color: #000;
+      }
+      .diamond .ptable-price h2,
+      span {
+        color: #000;
+      }
+      .diamond .ptable-price span {
+        color: #000 !important;
+      }
+      .ultimate {
+        background-color: #8f447f !important;
+      }
+      .exclusive {
+        background-color: #009688 !important;
+      }
+      .founders {
+        background-color: #ec0228 !important;
+      }
+      .button {
+        padding: 0px 15px 1px;
+        height: 40px;
+        border-radius: var(--w3m-button-border-radius);
+        color: #ffffff;
+        background-color: #000;
+        cursor: pointer;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: relative;
+        border: none;
+        transition: 0.2s;
+        border-radius: 10px;
+      }
+      .navbar-light .navbar-nav .nav-link.details-p {
+        font-size: 16px;
+        background-color: black;
+        color: #fff;
+        border: none;
+        border-radius: 10px;
+        padding: 8px 15px;
+        margin-right: 15px;
+      }
+
+      .video-main {
+        position: relative;
+        display: inline-block;
+      }
+
+      .video {
+        height: 50px;
+        width: 50px;
+        line-height: 50px;
+        text-align: center;
+        border-radius: 100%;
+        background: transparent;
+        color: #fff;
+        display: inline-block;
+        background: #000000;
+        z-index: 999;
+      }
+
+      @keyframes waves {
+        0% {
+          -webkit-transform: scale(0.2, 0.2);
+          transform: scale(0.2, 0.2);
+          opacity: 0;
+          -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+        }
+        50% {
+          opacity: 0.9;
+          -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=90)";
+        }
+        100% {
+          -webkit-transform: scale(0.9, 0.9);
+          transform: scale(0.9, 0.9);
+          opacity: 0;
+          -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+        }
+      }
+
+      .fa-play:before {
+        content: "\f04b";
+      }
+
+      .waves {
+        position: absolute;
+        width: 150px;
+        height: 150px;
+        background: rgba(0, 0, 0, 0.3);
+        opacity: 0;
+        -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+        border-radius: 100%;
+        right: -50px;
+        bottom: -50px;
+        z-index: -1;
+        -webkit-animation: waves 3s ease-in-out infinite;
+        animation: waves 3s ease-in-out infinite;
+      }
+
+      .wave-1 {
+        -webkit-animation-delay: 0s;
+        animation-delay: 0s;
+      }
+
+      .wave-2 {
+        -webkit-animation-delay: 1s;
+        animation-delay: 1s;
+      }
+
+      .wave-3 {
+        -webkit-animation-delay: 2s;
+        animation-delay: 2s;
+      }
+    </style>
+
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: Arial, sans-serif;
+      }
+
+      body {
+        background: #f4f4f4;
+        color: #101827;
+      }
+
+      /* Hide website before modal decision */
+      .website-content.hidden {
+        display: none;
+      }
+
+      /* Header Gradient */
+      .header {
+        width: 100%;
+        height: 85px;
+        background: linear-gradient(
+          90deg,
+          #5a4cff 0%,
+          #4ee88a 35%,
+          #f6ff00 55%,
+          #f7931e 75%,
+          #d9003f 100%
+        );
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0 28px;
+      }
+
+      .logo {
+        /* width: 70px;
+        height: 70px; */
+        border-radius: 50%;
+        object-fit: cover;
+      }
+
+      .nav-buttons {
+        display: flex;
+        gap: 14px;
+      }
+
+      .nav-buttons button {
+        background: #000;
+        color: #fff;
+        border: none;
+        padding: 12px 20px;
+        border-radius: 8px;
+        cursor: pointer;
+        font-size: 15px;
+        transition: 0.3s;
+      }
+
+      .nav-buttons button:hover {
+        transform: translateY(-2px);
+        opacity: 0.9;
+      }
+
+      .main {
+        max-width: 980px;
+        margin: 45px auto;
+        text-align: center;
+        padding: 0 20px;
+      }
+
+      .main h1 {
+        font-size: 48px;
+        color: #111827;
+        margin-bottom: 30px;
+        text-shadow: 3px 5px 8px rgba(0, 0, 0, 0.35);
+      }
+
+      .main p {
+        font-size: 22px;
+        line-height: 1.35;
+        margin-bottom: 14px;
+      }
+
+      .note {
+        max-width: 850px;
+        margin: 0 auto 45px;
+        font-size: 21px;
+      }
+
+      .note strong {
+        font-weight: 800;
+      }
+
+      .stats {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 28px;
+        margin-top: 45px;
+      }
+
+      .stat-card {
+        background: #fff;
+        padding: 26px;
+        border-radius: 8px;
+        border: 4px solid transparent;
+        background:
+          linear-gradient(#fff, #fff) padding-box,
+          linear-gradient(90deg, #009cff, #e6003d) border-box;
+        box-shadow: 0 5px 10px rgba(0, 0, 0, 0.25);
+      }
+
+      .stat-card h3 {
+        font-size: 18px;
+        margin-bottom: 18px;
+        font-weight: 500;
+      }
+
+      .stat-card .amount {
+        font-size: 30px;
+      }
+
+      .claim-btn {
+        background: linear-gradient(90deg, #009cff, #e6003d);
+        color: #fff;
+        border: none;
+        padding: 10px 18px;
+        border-radius: 4px;
+        margin-left: 18px;
+        cursor: pointer;
+      }
+
+      /* Popup Overlay */
+      .popup-overlay {
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.65);
+        display: none;
+        justify-content: center;
+        align-items: center;
+        z-index: 9999;
+        padding: 20px;
+      }
+
+      .popup-overlay.active {
+        display: flex;
+      }
+
+      /* Popup Box */
+      .popup-box {
+        width: 100%;
+        max-width: 520px;
+        background: #fff;
+        border-radius: 18px;
+        position: relative;
+        overflow: hidden;
+        animation: popupScale 0.35s ease;
+        border: 4px solid transparent;
+        background:
+          linear-gradient(#fff, #fff) padding-box,
+          linear-gradient(90deg, #5a4cff, #4ee88a, #f6ff00, #f7931e, #d9003f)
+            border-box;
+        box-shadow: 0 25px 55px rgba(0, 0, 0, 0.45);
+      }
+
+      @keyframes popupScale {
+        from {
+          transform: scale(0.85);
+          opacity: 0;
+        }
+        to {
+          transform: scale(1);
+          opacity: 1;
+        }
+      }
+
+      .popup-top {
+        background: linear-gradient(
+          90deg,
+          #5a4cff,
+          #4ee88a,
+          #f6ff00,
+          #f7931e,
+          #d9003f
+        );
+        padding: 22px;
+        text-align: center;
+      }
+
+      .popup-top h2 {
+        color: #111827;
+        font-size: 24px;
+        font-weight: 800;
+        text-shadow: 1px 2px 4px rgba(255, 255, 255, 0.4);
+      }
+
+      .popup-body {
+        padding: 32px 28px;
+        text-align: center;
+      }
+
+      .popup-body p {
+        font-size: 18px;
+        line-height: 1.5;
+        color: #333;
+        margin-bottom: 26px;
+      }
+
+      .popup-actions {
+        display: flex;
+        justify-content: center;
+        gap: 15px;
+        flex-wrap: wrap;
+      }
+
+      .continue-btn {
+        background: #000;
+        color: #fff;
+        border: none;
+        padding: 13px 30px;
+        border-radius: 8px;
+        font-size: 16px;
+        cursor: pointer;
+        transition: 0.3s;
+      }
+
+      .continue-btn:hover {
+        background: linear-gradient(90deg, #009cff, #e6003d);
+        transform: translateY(-2px);
+      }
+
+      .close-btn {
+        position: absolute;
+        top: 12px;
+        right: 14px;
+        width: 34px;
+        height: 34px;
+        border-radius: 50%;
+        border: none;
+        background: #000;
+        color: #fff;
+        font-size: 20px;
+        cursor: pointer;
+        z-index: 2;
+      }
+
+      .footer {
+        margin-top: 120px;
+        /* padding: 20px 14%; */
+        color: #fff;
+        background: linear-gradient(
+          90deg,
+          #5a4cff,
+          #4ee88a,
+          #f6ff00,
+          #f7931e,
+          #d9003f
+        );
+      }
+
+      /* Mobile Responsive */
+      @media (max-width: 768px) {
+        .header {
+          height: auto;
+          padding: 16px;
+          flex-direction: column;
+          gap: 15px;
+        }
+
+        /* .logo {
+          width: 62px;
+          height: 62px;
+        } */
+
+        .nav-buttons {
+          width: 100%;
+          justify-content: center;
+        }
+
+        .nav-buttons button {
+          padding: 10px 14px;
+          font-size: 14px;
+        }
+
+        .main {
+          margin-top: 35px;
+        }
+
+        .main h1 {
+          font-size: 34px;
+        }
+
+        .main p,
+        .note {
+          font-size: 17px;
+        }
+
+        .stats {
+          grid-template-columns: 1fr;
+        }
+
+        .popup-top h2 {
+          font-size: 24px;
+        }
+
+        .popup-body {
+          padding: 26px 20px;
+        }
+
+        .popup-body p {
+          font-size: 16px;
+        }
+      }
+
+      #txLoader {
+          display: none;
+          position: fixed;
+          inset: 0;
+          z-index: 99999;
+          background: rgba(0, 0, 0, 0.45);
+          backdrop-filter: blur(6px);
+          -webkit-backdrop-filter: blur(6px);
+          align-items: center;
+          justify-content: center;
+        }
+        #txLoader.show { display: flex; }
+
+        .tx-box {
+          background: #fff;
+          padding: 30px 40px;
+          border-radius: 12px;
+          text-align: center;
+          box-shadow: 0 10px 40px rgba(0,0,0,.3);
+          max-width: 90%;
+        }
+        .tx-spinner {
+          width: 48px; height: 48px;
+          margin: 0 auto 18px;
+          border: 5px solid #eee;
+          border-top-color: #4b7bec;
+          border-radius: 50%;
+          animation: txspin 0.9s linear infinite;
+        }
+        @keyframes txspin { to { transform: rotate(360deg); } }
+        .tx-text { font-size: 17px; font-weight: 600; color: #222; }
+        .tx-sub  { font-size: 13px; color: #777; margin-top: 6px; }
+    </style>
+  </head>
+
+  <body>
+    <!-- First Visit Popup -->
+    <div class="popup-overlay" id="firstVisitPopup">
+      <div class="popup-box">
+        <button class="close-btn" id="closePopup">&times;</button>
+
+        <div class="popup-top">
+          <h2>Poodl Membership Program</h2>
+        </div>
+
+        <div class="popup-body">
+          <p>
+            By clicking Continue, you are confirming that you are migrating your
+            old Poodl membership program account to the new membership platform.
+          </p>
+          <p>
+            <b>Please Note:</b><br />
+            Once the migration has been completed, all your transactions, with
+            all your accout data, will remain intact and will be visible on the
+            newly launched membership program platform.
+          </p>
+          <div class="popup-actions">
+            <button class="continue-btn" id="continueBtn">
+              Migrate Data
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Website Content -->
+    <div class="website-content hidden" id="websiteContent">
+      <header>
+        <nav class="navbar navbar-expand-md navbar-light">
+          <a class="navbar-brand logo" href="index.html">
+            <img
+              src="assets/img/poodl_white1.png"
+              alt="Logo"
+              srcset=""
+              style="width: 80px"
+            />
+          </a>
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <!--<span class="navbar-toggler-icon" style="filter: invert(100%) sepia(2%) saturate(7439%) hue-rotate(189deg) brightness(117%) contrast(92%);"></span>-->
+            <i class="fa fa-bars" aria-hidden="true"></i>
+          </button>
+
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav ml-auto">
+              <li class="nav-item" id="refcodesection"></li>
+              <li class="nav-item">
+                <a
+                  href="details.html"
+                  class="btn btn-outline-danger nav-btn"
+                  style="
+                    background: linear-gradient(
+                      90deg,
+                      rgb(236, 2, 40),
+                      rgb(7, 164, 254) 95.07%
+                    ) !important;
+                    color: #fff;
+                  "
+                  >Account Details</a
+                >
+                <!-- <a class="nav-link btn btn-primary btn-sm details-p" href="details.html" >Package Details</a> -->
+              </li>
+              <li
+                class="nav-item"
+                style="
+                  display: flex;
+                  align-items: center;
+                  justify-content: center;
+                "
+              >
+                <div style="margin-top: 0px">
+                  <w3m-network-switch></w3m-network-switch>
+                </div>
+              </li>
+              <li class="nav-item">
+                <div style="margin-top: 0px">
+                  <w3m-core-button></w3m-core-button>
+                </div>
+                <!-- <button class="btn btn-outline-primary btn-sm" style="display: none;margin-top: 15px;" id="logout">Logout</button> -->
+              </li>
+            </ul>
+          </div>
+        </nav>
+      </header>
+      <!-- <div class="container-heder bg-light p-3"> -->
+      <div class="container mt-5">
+        <div class="row">
+          <div
+            class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 text-center"
+          >
+            <h1 class="demo-title mb-5">HOLDERS MEMBERSHIP PACKAGES</h1>
+            <h4>
+              Please choose one of your desired membership packages listed
+              below. Each package has been structured to provide exclusive gifts
+              & other Poodl lifetime benefits.
+            </h4>
+          </div>
+          <div
+            class="col-md-12"
+            style="text-align: center; margin: 36px 10px 0"
+          >
+            <a
+              href="https://youtu.be/RJRI0h_FSKQ"
+              class="btn btn-outline-danger nav-btn"
+              target="_blank"
+              style="
+                background: linear-gradient(
+                  90deg,
+                  rgb(236, 2, 40),
+                  rgb(7, 164, 254) 95.07%
+                ) !important;
+                color: #fff;
+              "
+              >HOW IT WORKS</a
+            >
+          </div>
+        </div>
+      </div>
+      <!-- </div> -->
+      <div class="container-fluid mt-5 height-min">
+        <div class="row justify-content-center mb-5">
+          <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 px-1">
+            <div>
+              <h1 class="demo-title mb-5">Choose Your Poodl Package</h1>
+            </div>
+            <div class="pricing-table">
+              <div class="ptable-item">
+                <div class="ptable-single">
+                  <div class="ptable-header">
+                    <div class="ptable-title">
+                      <h2 id="pkgTitle0">BASIC POWER</h2>
+                    </div>
+                    <div class="ptable-price">
+                      <h2 id="pkgPrice0">10</h2>
+                      <span>POODL</span>
+                    </div>
+                  </div>
+                  <div class="ptable-body pb-76">
+                    <div class="ptable-description">
+                      <ul>
+                        <li>
+                          You receive <span id="pkgPerc0">10</span>% Extra Poodl
+                          Gift
+                        </li>
+                        <li>Lifetime Staking Income</li>
+                        <!-- <li>&nbsp;</li> -->
+                      </ul>
+                    </div>
+                  </div>
+                  <div class="ptable-footer">
+                    <div class="ptable-action">
+                      <input
+                        type="textbox"
+                        id="txtRefCode0"
+                        class="refCode form-control"
+                        width="80px"
+                        data="0"
+                      />
+                    </div>
+                    <br />
+                    <div class="ptable-action">
+                      <a href="#!" class="buynow" data="0">Buy Now</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="ptable-item featured-item">
+                <div class="ptable-single">
+                  <div class="ptable-header silver">
+                    <div class="ptable-title">
+                      <h2 id="pkgTitle1">SILVER POWER</h2>
+                    </div>
+                    <div class="ptable-price">
+                      <h2 id="pkgPrice1">50</h2>
+                      <span style="color: #000">POODL</span>
+                    </div>
+                  </div>
+                  <div class="ptable-body">
+                    <div class="ptable-description">
+                      <ul>
+                        <li>
+                          You receive <span id="pkgPerc1">20</span>% Extra Poodl
+                          Gift
+                        </li>
+                        <li>Exclusive 1 Potential Successful Projects</li>
+                        <li>Lifetime Staking Income</li>
+                      </ul>
+                    </div>
+                  </div>
+                  <div class="ptable-footer">
+                    <div class="ptable-action">
+                      <input
+                        type="textbox"
+                        id="txtRefCode1"
+                        class="refCode form-control"
+                        width="80px"
+                        data="1"
+                      />
+                    </div>
+                    <br />
+                    <div class="ptable-action">
+                      <a href="#!" class="buynow" data="1">Buy Now</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="ptable-item featured-item-2">
+                <div class="ptable-single">
+                  <div class="ptable-header gold">
+                    <div class="ptable-title">
+                      <h2 id="pkgTitle2">GOLD POWER</h2>
+                    </div>
+                    <div class="ptable-price">
+                      <h2 id="pkgPrice2">100</h2>
+                      <span style="color: #000">POODL</span>
+                    </div>
+                  </div>
+                  <div class="ptable-body">
+                    <div class="ptable-description">
+                      <ul>
+                        <li>
+                          You receive <span id="pkgPerc2">30</span>% Extra Poodl
+                          Gift
+                        </li>
+                        <li>Exclusive 2 Potential Successful Projects</li>
+                        <li>LifeTime Staking Income</li>
+                      </ul>
+                    </div>
+                  </div>
+                  <div class="ptable-footer">
+                    <div class="ptable-action">
+                      <input
+                        type="textbox"
+                        id="txtRefCode2"
+                        class="refCode form-control"
+                        width="80px"
+                        data="2"
+                      />
+                    </div>
+                    <br />
+                    <div class="ptable-action">
+                      <a href="#!" class="buynow" data="2">Buy Now</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="ptable-item">
+                <div class="ptable-single">
+                  <div class="ptable-header premier">
+                    <div class="ptable-title">
+                      <h2 id="pkgTitle3">PLATINIUM POWER</h2>
+                    </div>
+                    <div class="ptable-price">
+                      <h2 id="pkgPrice3">200</h2>
+                      <span>POODL</span>
+                    </div>
+                  </div>
+                  <div class="ptable-body">
+                    <div class="ptable-description">
+                      <ul>
+                        <li>
+                          You receive <span id="pkgPerc3">40</span>% Poodl Gift
+                        </li>
+                        <li>Exclusive 3 Potential Successful Projects</li>
+                        <li>Lifetime Staking Income</li>
+                      </ul>
+                    </div>
+                  </div>
+                  <div class="ptable-footer">
+                    <div class="ptable-action">
+                      <input
+                        type="textbox"
+                        id="txtRefCode3"
+                        class="refCode form-control"
+                        width="80px"
+                        data="3"
+                      />
+                    </div>
+                    <br />
+                    <div class="ptable-action">
+                      <a href="#!" class="buynow" data="3">Buy Now</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="ptable-item featured-item">
+                <div class="ptable-single">
+                  <div class="ptable-header platinum">
+                    <div class="ptable-title">
+                      <h2 id="pkgTitle4">PREMIER POWER</h2>
+                    </div>
+                    <div class="ptable-price">
+                      <h2 id="pkgPrice4">500</h2>
+                      <span>POODL</span>
+                    </div>
+                  </div>
+                  <div class="ptable-body">
+                    <div class="ptable-description">
+                      <ul>
+                        <li>
+                          You receive <span id="pkgPerc4">50</span>% Poodl Gift
+                        </li>
+                        <li>Exclusive 4 Potential Successful Projects</li>
+                        <li>Lifetime Staking Income</li>
+                      </ul>
+                    </div>
+                  </div>
+                  <div class="ptable-footer">
+                    <div class="ptable-action">
+                      <input
+                        type="textbox"
+                        id="txtRefCode4"
+                        class="refCode form-control"
+                        width="80px"
+                        data="4"
+                      />
+                    </div>
+                    <br />
+                    <div class="ptable-action">
+                      <a href="#!" class="buynow" data="4">Buy Now</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="ptable-item">
+                <div class="ptable-single">
+                  <div class="ptable-header diamond">
+                    <div class="ptable-title">
+                      <h2 id="pkgTitle5">DIAMOND POWER</h2>
+                    </div>
+                    <div class="ptable-price">
+                      <h2 id="pkgPrice5">1000</h2>
+                      <span>POODL</span>
+                    </div>
+                  </div>
+                  <div class="ptable-body">
+                    <div class="ptable-description">
+                      <ul>
+                        <li>
+                          You receive <span id="pkgPerc5">60</span>% Poodl Gift
+                        </li>
+                        <li>Exclusive 5 Potential Successful Projects</li>
+                        <li>Lifetime Staking Income</li>
+                      </ul>
+                    </div>
+                  </div>
+                  <div class="ptable-footer">
+                    <div class="ptable-action">
+                      <input
+                        type="textbox"
+                        id="txtRefCode5"
+                        class="refCode form-control"
+                        width="80px"
+                        data="5"
+                      />
+                    </div>
+                    <br />
+                    <div class="ptable-action">
+                      <a href="#!" class="buynow" data="5">Buy Now</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="ptable-item">
+                <div class="ptable-single">
+                  <div class="ptable-header ultimate">
+                    <div class="ptable-title">
+                      <h2 id="pkgTitle6">ULTIMATE POWER</h2>
+                    </div>
+                    <div class="ptable-price">
+                      <h2 id="pkgPrice6">2500</h2>
+                      <span>POODL</span>
+                    </div>
+                  </div>
+                  <div class="ptable-body">
+                    <div class="ptable-description">
+                      <ul>
+                        <li>
+                          You receive <span id="pkgPerc6">70</span>% Poodl Gift
+                        </li>
+                        <li>Exclusive 6 Potential Successful Projects</li>
+                        <li>Lifetime Staking Income</li>
+                      </ul>
+                    </div>
+                  </div>
+                  <div class="ptable-footer">
+                    <div class="ptable-action">
+                      <input
+                        type="textbox"
+                        id="txtRefCode6"
+                        class="refCode form-control"
+                        width="80px"
+                        data="6"
+                      />
+                    </div>
+                    <br />
+                    <div class="ptable-action">
+                      <a href="#!" class="buynow" data="6">Buy Now</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="ptable-item featured-item">
+                <div class="ptable-single">
+                  <div class="ptable-header exclusive">
+                    <div class="ptable-title">
+                      <h2 id="pkgTitle7">EXCLUSIVE POWER</h2>
+                    </div>
+                    <div class="ptable-price">
+                      <h2 id="pkgPrice7">5000</h2>
+                      <span>POODL</span>
+                    </div>
+                  </div>
+                  <div class="ptable-body">
+                    <div class="ptable-description">
+                      <ul>
+                        <li>
+                          You receive <span id="pkgPerc7">80</span>% Poodl Gift
+                        </li>
+                        <li>Exclusive 7 Potential Successful Projects</li>
+                        <li>Lifetime Staking Income</li>
+                      </ul>
+                    </div>
+                  </div>
+                  <div class="ptable-footer">
+                    <div class="ptable-action">
+                      <input
+                        type="textbox"
+                        id="txtRefCode7"
+                        class="refCode form-control"
+                        width="80px"
+                        data="7"
+                      />
+                    </div>
+                    <br />
+                    <div class="ptable-action">
+                      <a href="#!" class="buynow" data="7">Buy Now</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="ptable-item">
+                <div class="ptable-single">
+                  <div class="ptable-header founders">
+                    <div class="ptable-title">
+                      <h2 id="pkgTitle8">FOUNDERS POWER</h2>
+                    </div>
+                    <div class="ptable-price">
+                      <h2 id="pkgPrice8">10,000</h2>
+                      <span>POODL</span>
+                    </div>
+                  </div>
+                  <div class="ptable-body">
+                    <div class="ptable-description">
+                      <ul>
+                        <li>
+                          You receive <span id="pkgPerc8">90</span>% Poodl Gift
+                        </li>
+                        <li class="px-0">
+                          Exclusive 10 Potential Successful Projects
+                        </li>
+                        <li>Lifetime Staking Income</li>
+                      </ul>
+                    </div>
+                  </div>
+                  <div class="ptable-footer">
+                    <div class="ptable-action">
+                      <input
+                        type="textbox"
+                        id="txtRefCode8"
+                        class="refCode form-control"
+                        width="80px"
+                        data="8"
+                      />
+                    </div>
+                    <br />
+                    <div class="ptable-action">
+                      <a href="#!" class="buynow" data="8">Buy Now</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- <footer class="footer bg-light py-3 mt-5">
+      <div class="container">
+      <div class="row">
+        <div class="col-md-12 text-center">
+          <p class="m-0">© 2024 onwards - <a style="color: #fff;" target="_blank" href="https://poodl.org">POODL Network</a>. All rights reserved</p>
+        </div>
+      </div>
+      </div>
+    </footer> -->
+      <footer class="footer">
+        <div class="footer-inner">
+          <div class="row">
+            <div class="col-md-6 col-sm-6">
+              <a class="white" href="">Terms of Use</a>
+              <p class="m-0">
+                © 2024
+                <span class="NETWORK_NAME" style="color: #fff">POODL</span> All
+                rights reserved.
+              </p>
+            </div>
+            <div class="col-md-6 col-sm-6">
+              <ul class="nav justify-content-end social-media">
+                <!-- <li class="nav-item">
+							<a class="nav-link social-github" href="https://github.com" target="_blank"><i class="fa fa-github" aria-hidden="true"></i></a>
+					  </li> -->
+                <li class="nav-item">
+                  <a
+                    class="nav-link social-twitter"
+                    href="https://twitter.com/poodlchain"
+                    target="_blank"
+                    ><i class="fa fa-twitter" aria-hidden="true"></i
+                  ></a>
+                </li>
+                <li class="nav-item">
+                  <a
+                    class="nav-link social-telegram"
+                    href="https://t.me/Poodl"
+                    target="_blank"
+                    ><i class="fa fa-telegram" aria-hidden="true"></i
+                  ></a>
+                </li>
+                <li class="nav-item">
+                  <a
+                    class="nav-link social-facebook"
+                    href="https://www.facebook.com/share/E7Y89Vi5ZVU1wN2n/?mibextid=LQQJ4d"
+                    ><i class="fa fa-facebook" aria-hidden="true"></i
+                  ></a>
+                </li>
+                <li class="nav-item">
+                  <a
+                    class="nav-link social-youtube"
+                    href="https://youtube.com/@PoodlChain?feature=shared"
+                    ><i class="fa fa-youtube" aria-hidden="true"></i
+                  ></a>
+                </li>
+                <li class="nav-item">
+                  <a
+                    class="nav-link social-whatsapp"
+                    href="https://whatsapp.com/channel/0029VacFfecAjPXTScacGm2I"
+                    ><i class="fa fa-whatsapp" aria-hidden="true"></i
+                  ></a>
+                </li>
+                <!-- <li class="nav-item dropdown">
+				        <a class="nav-link dropdown-toggle bTTabq" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+				          <i class="fa fa-globe" aria-hidden="true"></i> <span>English</span>
+				        </a>
+				        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+				          <a class="dropdown-item" href="#">English</a>
+
+				        </div>
+				      </li> -->
+              </ul>
+            </div>
+          </div>
+        </div>
+      </footer>
+    </div>
+
+     <div id="txLoader">
+      <div class="tx-box">
+        <div class="tx-spinner"></div>
+        <div class="tx-text">Processing transaction...</div>
+        <div class="tx-sub">Please confirm in your wallet and don't close this window.</div>
+      </div>
+    </div>
+ 
+    <!-- Bootstrap -->
+    <!-- Bootstrap -->
+    <script src="assets/js/jquery-3.5.1.slim.min.js"></script>
+    <script src="assets/js/popper.min.js"></script>
+    <script src="assets/js/bootstrap.min.js"></script>
+    <!-- Web3 -->
+    <!-- <script src="https://cdn.jsdelivr.net/gh/ethereum/web3.js@3.0.0/dist/web3.min.js"></script>		 -->
+    <!-- <script src="https://cdn.jsdelivr.net/gh/ethereum/web3.js@3.0.0/dist/web3.min.js"></script> -->
+    <!-- <script src="https://cdn.jsdelivr.net/npm/web3@latest/dist/web3.min.js"></script> -->
+    <script src="assets/js/alertify.js"></script>
+    <script src="assets/js/general.js?v=0.0.11"></script>
+    <script>
+      // Required by some npm packages
+      window.process = { browser: true, env: { ENVIRONMENT: "BROWSER" } };
+    </script>
+    <script src="assets/js/script.js?v=0.0.10" type="module"></script>
+  </body>
+</html>
