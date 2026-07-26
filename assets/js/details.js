@@ -148,7 +148,7 @@ const wagmiConfig = createConfig({
  
     async function init(){
 
-
+        
       if(useraddress!= null) {
 
         const getpckLength = await readContract({
@@ -173,8 +173,8 @@ const wagmiConfig = createConfig({
             args: [useraddress],
           })
 
-          //userTotalStake = Number(userTotalStake) / Math.pow(10, decimals);
-          //userTotalStake = userTotalStake.toFixed(4);
+          userTotalStake = Number(userTotalStake) / Math.pow(10, decimals);
+          userTotalStake = userTotalStake.toFixed(4);
           $("#totalStakedCoins").html(userTotalStake +' ' +symbol);
 
          rewardAmount = await readContract({
@@ -184,8 +184,8 @@ const wagmiConfig = createConfig({
             args: [useraddress,true],
           })
          //alert (" rewardAmount = " + rewardAmount);
-          //rewardAmount = Number(rewardAmount) / Math.pow(10, decimals);
-          //rewardAmount = rewardAmount.toFixed(7);
+          rewardAmount = Number(rewardAmount) / Math.pow(10, decimals);
+          rewardAmount = rewardAmount.toFixed(7);
           $("#rewardAmount").html(rewardAmount+' ' +symbol);
 
           refereeCommission = await readContract({
@@ -195,10 +195,11 @@ const wagmiConfig = createConfig({
             args: [useraddress],
           })
            
-           
-          //refereeCommission =  Number(refereeCommission) / Math.pow(10, decimals)
-          // alert("refereeCommission 2 : " +refereeCommission);
-          //refereeCommission = refereeCommission.toFixed(7);
+       
+          refereeCommission =  Number(refereeCommission) / Math.pow(10, decimals)
+            
+          refereeCommission = refereeCommission.toFixed(7);
+          
           //$("#totalCommAmt").html(refereeCommission +' ' +symbol  + ' '+ '<button type="button" class="btn btn-outline-danger staking-pink" id="claimall" >Claim Total Commission</button>');
 
           refereeComiPurchaseIds = await readContract({
@@ -207,7 +208,7 @@ const wagmiConfig = createConfig({
             functionName: 'getAllCommissionPurchaseIds',
             args: [useraddress],
           })
-      
+        
           getstakingTxs();
           getBonusData();
           getCommissionTxs();
@@ -225,6 +226,36 @@ const wagmiConfig = createConfig({
       }
 
     }
+
+    function fromWei(weiValue, decimals) {
+      let v = BigInt(weiValue);              // accepts bigint, string, or number
+      const neg = v < 0n;
+      if (neg) v = -v;
+
+      let s = v.toString().padStart(decimals + 1, '0');   // ensure at least 1 whole digit
+
+      const whole = s.slice(0, s.length - decimals);
+      let frac    = s.slice(s.length - decimals);
+
+      frac = frac.replace(/0+$/, '');        // drop trailing zeros: "500000..." -> "5"
+
+      const result = frac ? `${whole}.${frac}` : whole;
+      return neg ? '-' + result : result;
+    }
+
+
+    function toWei(amountStr, decimals) {
+        amountStr = String(amountStr).trim();
+        const neg = amountStr.startsWith('-');
+        if (neg) amountStr = amountStr.slice(1);
+
+        let [whole, frac = ''] = amountStr.split('.');
+        frac = frac.padEnd(decimals, '0').slice(0, decimals);
+        const combined = (whole + frac).replace(/^0+/, '') || '0';
+        const result = BigInt(combined);
+        return neg ? -result : result;
+      }
+
 
      function showLoader(msg, sub) {
         $('#txLoader .tx-text').text(msg || 'Processing transaction...');
@@ -279,6 +310,12 @@ const wagmiConfig = createConfig({
                     args: [userPurId],
                 })
 
+                var buyAmt = Number(userPurData.buyAmount) / Math.pow(10, decimals);
+                buyAmt = buyAmt.toFixed(7);
+
+                var giftAmt = Number(userPurData.giftAmount) / Math.pow(10, decimals);
+                giftAmt = giftAmt.toFixed(7); 
+
                 var getPkgInfo = await readContract({
                   address: PoodlReferralContractAddress,
                   abi: memberShipRefCodeABI,
@@ -288,8 +325,8 @@ const wagmiConfig = createConfig({
 
                 stakingData+='<tr>'+
                                 '<td>'+ getPkgInfo[0]+'</td>'+
-                                '<td>'+userPurData.buyAmount+' ' +symbol+'</td>'+
-                                '<td>'+userPurData.giftAmount+' ' +symbol+'</td>'+
+                                '<td>'+buyAmt+' ' +symbol+'</td>'+
+                                '<td>'+giftAmt+' ' +symbol+'</td>'+
                                 '<td><a target="_blank" href=""><i class="fa fa-external-link-square" aria-hidden="true"></i></a></td>'+
                             '</tr>';
                         
@@ -339,6 +376,8 @@ const wagmiConfig = createConfig({
     }
     async function getCommissionTxs(){
 
+        useraddress = "0x9FC47A7d69D3914A1592783E752BbC0f7Cf9EBaE";
+
             if(refereeComiPurchaseIds.length>0){
                  var commData ="";
                  var purIds = "";
@@ -354,8 +393,8 @@ const wagmiConfig = createConfig({
 
                     
                     var commamount = purchaseDetails.commissionAmount;
-                    //commamount =  Number(commamount) / Math.pow(10, decimals)
-                    //commamount = commamount.toFixed(7);
+                    commamount =  Number(commamount) / Math.pow(10, decimals)
+                    commamount = commamount.toFixed(7);
                     var commissionTD= "";
 
                      if(purchaseDetails.commissionClaimed==false){
@@ -484,7 +523,7 @@ const wagmiConfig = createConfig({
         
         const file = await fileHandle.getFile();
         var filetxt = await file.text();
-        alert(filetxt);
+       
       } catch (err) {
         if (err.name === 'AbortError') return;   // user closed the dialog
         $('#output').text('Error: ' + err.message);

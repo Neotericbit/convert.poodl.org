@@ -283,6 +283,22 @@ const wagmiConfig = createConfig({
 
     init();
 
+    function fromWei(weiValue, decimals) {
+      let v = BigInt(weiValue);              // accepts bigint, string, or number
+      const neg = v < 0n;
+      if (neg) v = -v;
+
+      let s = v.toString().padStart(decimals + 1, '0');   // ensure at least 1 whole digit
+
+      const whole = s.slice(0, s.length - decimals);
+      let frac    = s.slice(s.length - decimals);
+
+      frac = frac.replace(/0+$/, '');        // drop trailing zeros: "500000..." -> "5"
+
+      const result = frac ? `${whole}.${frac}` : whole;
+      return neg ? '-' + result : result;
+    }
+
 
     function toWei(amountStr, decimals) {
         amountStr = String(amountStr).trim();
