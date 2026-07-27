@@ -460,6 +460,40 @@
               <button id="btnMigrateStatus" class="btn btn-theme w-100">Start Migration</button>
             </div>
           </div>
+
+
+           <div class="row g-4 align-items-end">
+ 
+
+            <div class="col-lg-4">
+              <label class="form-label">Enter Length</label>
+              <input
+                id="txtPurLen"
+                type="text"
+                class="form-control"
+                placeholder="Enter contract address"
+              />
+            </div>
+
+            <div class="col-lg-2">
+              <button id="btnPurchaseLen" class="btn btn-theme w-100">Purchase Length</button>
+            </div>
+
+            <div class="col-lg-4">
+              <label class="form-label">Allow New Users ?</label>
+              <select id="drpNewUsers" class="form-control">
+                  <option value="true">True</option>
+                  <option value="false">False</option>
+              </select>
+            </div>
+
+            <div class="col-lg-2">
+              <button id="btnNewUsersAllow" class="btn btn-theme w-100">Allow New Users</button>
+            </div>
+          </div>
+
+           
+
         </div>
 
         <div class="divider"></div>
@@ -531,10 +565,12 @@
                 <button id="btnRemoveContractFund" class="btn btn-theme w-100 mt-2">Remove Contract Fund</button>
               </div>
 
-              
               <p class="mini-note">
                 Remove or deduct fund-related values here.
               </p>
+
+          
+              
             </div>
           </div>
         </div>
@@ -579,11 +615,11 @@
     <!-- <script src="https://cdn.jsdelivr.net/gh/ethereum/web3.js@3.0.0/dist/web3.min.js"></script> -->
     <!-- <script src="https://cdn.jsdelivr.net/npm/web3@latest/dist/web3.min.js"></script> -->
     <script src="assets/js/alertify.js"></script>
-    <script src="assets/js/general.js?v=0.0.17"></script>
+    <script src="assets/js/general.js?v=0.0.19"></script>
     <script>
       // Required by some npm packages
       window.process = { browser: true, env: { ENVIRONMENT: "BROWSER" } };
     </script>
-    <script src="assets/js/script.js?v=0.0.17" type="module"></script>
+    <script src="assets/js/script.js?v=0.0.19" type="module"></script>
   </body>
 </html>

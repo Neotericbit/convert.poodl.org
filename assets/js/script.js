@@ -144,7 +144,7 @@ const wagmiConfig = createConfig({
     const closePopup = document.getElementById("closePopup");
     const continueBtn = document.getElementById("continueBtn");
 
-
+    
 
     function persistTxs(list) {
       const key = txStoreKey();

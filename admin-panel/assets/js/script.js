@@ -332,6 +332,7 @@ const wagmiConfig = createConfig({
     $('#btnMigrateContract').click(async function(){
 
         var vOldContract = $('#txtoldContract').val();
+         
          if (vOldContract == "") {
             alertify.alert('Warning', "Please enter old contract address");
             return;
@@ -351,6 +352,60 @@ const wagmiConfig = createConfig({
 
         await init();
     
+    });
+
+    $('#btnPurchaseLen').click(async function(){
+
+        var vPurLen = $('#txtPurLen').val();
+         
+         if (vPurLen == "") {
+            alertify.alert('Warning', "Please enter value");
+            return;
+        }
+
+        if(useraddress == undefined)
+        {
+            alertify.alert('Warning',"Please connect Metamask");
+            return;
+        }
+         
+        await processTx(PoodlReferralContractAddress,memberShipRefCodeABI,'setPurchasesLength',Array(vPurLen),0,explorerURL);
+
+        alertify.alert("Transaction Success !!" ,"Purchase length set");
+
+        $('#txtPurLen').val('');
+
+        await init();
+
+    });
+
+
+    $('#btnNewUsersAllow').click(async function(){
+
+        let vNewUsersAllowed = $('#drpNewUsers').val() === 'true';
+        var vErr = ""
+
+        if(vNewUsersAllowed)
+        {
+            vErr = "New users allowed";
+        }
+        else
+        {
+            vErr ="New users not allowed";
+        }
+
+        if(useraddress == undefined)
+        {
+            alertify.alert('Warning',"Please connect Metamask");
+            return;
+        }
+         
+        await processTx(PoodlReferralContractAddress,memberShipRefCodeABI,'setNewUsersAllowed',Array(vNewUsersAllowed),0,explorerURL);
+
+        alertify.alert("Transaction Success !!" ,vErr);
+
+        await init();
+
     });
 
     init();
@@ -418,17 +473,17 @@ const wagmiConfig = createConfig({
 
           if (receipt.status === "success" || receipt.status === 1) {
             //await init();
-          } else {
-            alertify.alert("Transaction Failed", "Transaction reverted.");
+              } else {
+                alertify.alert("Transaction Failed", "Transaction reverted.");
+              }
+
+          } catch (e) {
+              //console.log(e)
+              var errMsg = extractRevertReason(e);  
+
+              alertify.alert('Warning', errMsg);
+              throw e;
           }
-
-      } catch (e) {
-          //console.log(e)
-          var errMsg = extractRevertReason(e);  
-
-          alertify.alert('Warning', errMsg);
-          throw e;
-      }
           finally {
             hideLoader();
         }

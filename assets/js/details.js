@@ -91,7 +91,7 @@ const wagmiConfig = createConfig({
   var useraddress = account.address;
   var rewardAmount;
   var packageArray =[];
-  var refereeComiPurchaseIds;
+  var refereeComiData;
   var minCommission =10;
   var refereeCommission =0;
 
@@ -147,7 +147,6 @@ const wagmiConfig = createConfig({
 
  
     async function init(){
-
         
       if(useraddress!= null) {
 
@@ -202,10 +201,10 @@ const wagmiConfig = createConfig({
           
           //$("#totalCommAmt").html(refereeCommission +' ' +symbol  + ' '+ '<button type="button" class="btn btn-outline-danger staking-pink" id="claimall" >Claim Total Commission</button>');
 
-          refereeComiPurchaseIds = await readContract({
+          refereeComiData = await readContract({
             address: PoodlReferralContractAddress,
             abi: memberShipRefCodeABI,
-            functionName: 'getAllCommissionPurchaseIds',
+            functionName: 'getRefereeCommissions',
             args: [useraddress],
           })
         
@@ -376,39 +375,31 @@ const wagmiConfig = createConfig({
     }
     async function getCommissionTxs(){
 
-        useraddress = "0x9FC47A7d69D3914A1592783E752BbC0f7Cf9EBaE";
 
-            if(refereeComiPurchaseIds.length>0){
+            if(refereeComiData.length>0){
                  var commData ="";
                  var purIds = "";
                  var amtCnt =0;
-                for (var i = 0; i < refereeComiPurchaseIds.length; i++) {
+                for (var i = 0; i < refereeComiData.length; i++) {
 
-                     var purchaseDetails = await readContract({
-                      address: PoodlReferralContractAddress,
-                      abi: memberShipRefCodeABI,
-                      functionName: 'getPurchaseDetails',
-                      args: [refereeComiPurchaseIds[i]],
-                    })
-
-                    
-                    var commamount = purchaseDetails.commissionAmount;
+                    var commamount = refereeComiData.amount;
+                     
                     commamount =  Number(commamount) / Math.pow(10, decimals)
                     commamount = commamount.toFixed(7);
                     var commissionTD= "";
 
-                     if(purchaseDetails.commissionClaimed==false){
+                     if(purchaseDetails.claimed==false){
                           if(amtCnt==0)
                           {
-                              purIds = refereeComiPurchaseIds[i];
+                              purIds = refereeComiData.purchaseId;
                           }
                           else
                           {
-                              purIds += "," + refereeComiPurchaseIds[i];
+                              purIds += "," + refereeComiData.purchaseId;
                           }
 
                           amtCnt++;
-                          commissionTD='<td><a href="#" type="button" class="claimcommission" data-id="'+refereeComiPurchaseIds[i]+'"><i   aria-hidden="true">Claim Commission</i></a></td> ';
+                          commissionTD='<td><a href="#" type="button" class="claimcommission" data-id="'+refereeComiData.purchaseId+'"><i   aria-hidden="true">Claim Commission</i></a></td> ';
                         } else {
                           commissionTD ='<td> <i   aria-hidden="true">Commission Claimed</i></td> ';
                         }
@@ -427,7 +418,6 @@ const wagmiConfig = createConfig({
                   var strTotals ="";
                   strTotals += 'Total Commission : <span id="totalCommAmt">'+refereeCommission +' ' +symbol  + ' '+ '<button type="button" class="btn btn-outline-danger staking-pink" id="claimall" >Claim Total Commission</button>'+' </span>'
                   
-                  //alert(strTotals);
                   $("#total-commission-tab").html(strTotals);
 
 
