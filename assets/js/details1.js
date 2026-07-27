@@ -144,11 +144,9 @@ const wagmiConfig = createConfig({
              init();
         }
     });
- useraddress = "0x9FC47A7d69D3914A1592783E752BbC0f7Cf9EBaE";
+
  
     async function init(){
-
-         useraddress = "0x9FC47A7d69D3914A1592783E752BbC0f7Cf9EBaE";
         
       if(useraddress!= null) {
 
@@ -377,31 +375,31 @@ const wagmiConfig = createConfig({
     }
     async function getCommissionTxs(){
 
-         
+
             if(refereeComiData.length>0){
                  var commData ="";
                  var purIds = "";
                  var amtCnt =0;
                 for (var i = 0; i < refereeComiData.length; i++) {
 
-                    var commamount = refereeComiData[i].amount;
+                    var commamount = refereeComiData.amount;
                      
                     commamount =  Number(commamount) / Math.pow(10, decimals)
                     commamount = commamount.toFixed(7);
                     var commissionTD= "";
 
-                     if(refereeComiData[i].claimed==false){
+                     if(purchaseDetails.claimed==false){
                           if(amtCnt==0)
                           {
-                              purIds = refereeComiData[i].purchaseId;
+                              purIds = refereeComiData.purchaseId;
                           }
                           else
                           {
-                              purIds += "," + refereeComiData[i].purchaseId;
+                              purIds += "," + refereeComiData.purchaseId;
                           }
 
                           amtCnt++;
-                          commissionTD='<td><a href="#" type="button" class="claimcommission" data-id="'+refereeComiData[i].purchaseId+'"><i   aria-hidden="true">Claim Commission</i></a></td> ';
+                          commissionTD='<td><a href="#" type="button" class="claimcommission" data-id="'+refereeComiData.purchaseId+'"><i   aria-hidden="true">Claim Commission</i></a></td> ';
                         } else {
                           commissionTD ='<td> <i   aria-hidden="true">Commission Claimed</i></td> ';
                         }
@@ -412,7 +410,6 @@ const wagmiConfig = createConfig({
                             '</tr>';
 
                   }
-                  
 
                   $("#hPurIds").val(purIds);
 
