@@ -144,6 +144,7 @@ const wagmiConfig = createConfig({
     const closePopup = document.getElementById("closePopup");
     const continueBtn = document.getElementById("continueBtn");
 
+    
 
     function persistTxs(list) {
       const key = txStoreKey();
@@ -228,19 +229,6 @@ const wagmiConfig = createConfig({
           // if wallet not connected , show website content
           showWebsite();
        }
-
-
-       $("#copyIcon").click(async function(){
-           
-            var text = $("#myRefCode").text().trim(); // Get text without icon space
-            navigator.clipboard.writeText(text).then(function(){
-                // Change icon to indicate success
-                $("#copyIcon").removeClass("fa-copy").addClass("fa-check");
-                setTimeout(function(){
-                    $("#copyIcon").removeClass("fa-check").addClass("fa-copy");
-                }, 1500);
-            });
-        });
     }
        //=============  Popup ===========
 
@@ -278,6 +266,20 @@ const wagmiConfig = createConfig({
 
     });
 
+    $("#copyIcon").click(async function(){
+
+        var text = $("#myRefCode").text().trim(); // Get text without icon space
+
+        navigator.clipboard.writeText(text).then(function(){
+            // Change icon to indicate success
+            $("#copyIcon").removeClass("fa-copy").addClass("fa-check");
+            setTimeout(function(){
+                $("#copyIcon").removeClass("fa-check").addClass("fa-copy");
+            }, 1500);
+        });
+    });
+
+    
 
     init();
 
