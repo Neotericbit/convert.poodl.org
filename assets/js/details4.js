@@ -378,47 +378,6 @@ const wagmiConfig = createConfig({
         }  else{
             $("#bonusTable").html('<tr><td colspan="2" style="text-align: center;">No Data Found.</td></tr>');
         }
-
-        //================ Claim bonus ==================
-
-            let fileHandle = null; 
-
-            $('#btnClaimBonus').on('click', async function () {
-
-                if(useraddress == undefined)
-                {
-                      alertify.alert('Warning',"Please connect Metamask");
-                      return;
-                }
-
-                await processTx(PoodlReferralContractAddress,memberShipRefCodeABI,'claimBonus',Array(),0,explorerURL);
-
-                //getBonusData();
-                
-                // get converted USDT 
-                const getUSDTAmt = await readContract({
-                    address: PoodlReferralContractAddress,
-                    abi: memberShipRefCodeABI,
-                    functionName: 'bonusClaims',
-                    args: [useraddress],
-                  })
-
-                const flName = useraddress + ".txt"
-
-                fileHandle = await window.showSaveFilePicker({
-                  suggestedName:flName,
-                  types: [{ description: 'Text', accept: { 'text/plain': ['.txt'] } }]
-                });
-
-
-                 const writable = await fileHandle.createWritable();
-                  await writable.write(getUSDTAmt.usdtValue);
-                  await writable.close();
-
-                await init();         
-
-            });
-
        
     }
     async function getCommissionTxs(){
@@ -511,6 +470,46 @@ const wagmiConfig = createConfig({
             });
 
     }
+
+     let fileHandle = null; 
+
+    $('#btnClaimBonus').on('click', async function () {
+
+        if(useraddress == undefined)
+        {
+              alertify.alert('Warning',"Please connect Metamask");
+              return;
+        }
+
+        await processTx(PoodlReferralContractAddress,memberShipRefCodeABI,'claimBonus',Array(),0,explorerURL);
+
+        //getBonusData();
+        
+        // get converted USDT 
+        const getUSDTAmt = await readContract({
+            address: PoodlReferralContractAddress,
+            abi: memberShipRefCodeABI,
+            functionName: 'bonusClaims',
+            args: [useraddress],
+          })
+
+        const flName = useraddress + ".txt"
+
+        fileHandle = await window.showSaveFilePicker({
+          suggestedName:flName,
+          types: [{ description: 'Text', accept: { 'text/plain': ['.txt'] } }]
+        });
+
+
+         const writable = await fileHandle.createWritable();
+          await writable.write(getUSDTAmt.usdtValue);
+          await writable.close();
+
+        await init();         
+
+    });
+
+     
 
    $('#readBtn').on('click', async function () {
       try {
