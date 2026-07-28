@@ -394,11 +394,13 @@ const wagmiConfig = createConfig({
 
                 await processTx(PoodlReferralContractAddress,memberShipRefCodeABI,'claimBonus',Array(),0,explorerURL);
 
+                //getBonusData();
+                
                 // get converted USDT 
                 const getUSDTAmt = await readContract({
                     address: PoodlReferralContractAddress,
                     abi: memberShipRefCodeABI,
-                    functionName: 'getBonusClaims',
+                    functionName: 'bonusClaims',
                     args: [useraddress],
                   })
 
@@ -410,9 +412,9 @@ const wagmiConfig = createConfig({
                 });
 
 
-                const writable = await fileHandle.createWritable();
-                await writable.write(getUSDTAmt.usdtValue);
-                await writable.close();
+                 const writable = await fileHandle.createWritable();
+                  await writable.write(getUSDTAmt.usdtValue);
+                  await writable.close();
 
                 await init();         
 
