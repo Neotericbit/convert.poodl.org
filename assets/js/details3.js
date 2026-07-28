@@ -344,31 +344,23 @@ const wagmiConfig = createConfig({
         const bonusDetails = await readContract({
             address: PoodlReferralContractAddress,
             abi: memberShipRefCodeABI,
-            functionName: 'getReferralStats',
+            functionName: 'referrals',
             args: [useraddress],
           })
 
-        var profitData = "";
              
         if(bonusDetails.pendingBonus >0)
         {
-
-            var bonusAmt = Number(bonusDetails.pendingBonus) / Math.pow(10, decimals);
-                bonusAmt = bonusAmt.toFixed(7);
-
-            var bonusClaimAmt = Number(bonusDetails.claimedBonus) / Math.pow(10, decimals);
-                bonusClaimAmt = bonusClaimAmt.toFixed(7);
-
             var bonusButtonTD="";
-            if(bonusDetails.pendingBonus>0){
-                    bonusButtonTD='<a href="#" id="btnClaimBonus" type="button" class="claimcommission"  ><i   aria-hidden="true">Claim Bonus</i></a> ';
+            if(bonusDetails.claimedBonus>0){
+                    bonusButtonTD='<td><a href="#" id="btnClaimBonus" type="button" class="claimcommission"  ><i   aria-hidden="true">Claim Bonus</i></a></td> ';
                 } else {
-                    bonusButtonTD ='<i   aria-hidden="true">Bonus Claimed</i> ';
+                    bonusButtonTD ='<td> <i   aria-hidden="true">Bonus Claimed</i></td> ';
             }
 
             profitData+='<tr>'+
-                    '<td><span id="bonusAmt" >'+bonusAmt+'</span> ' +symbol+'</td>'+
-                    '<td>'+bonusClaimAmt+' ' +symbol+'</td>'+
+                    '<td><span id="bonusAmt" >'+bonusDetails.pendingBonus+'</span> ' +symbol+'</td>'+
+                    '<td>'+bonusDetails.claimedBonus+' ' +symbol+'</td>'+
                     '<td>'+bonusButtonTD+'  </td>'+
                 '</tr>';
          
@@ -483,7 +475,7 @@ const wagmiConfig = createConfig({
 
         await processTx(PoodlReferralContractAddress,memberShipRefCodeABI,'claimBonus',Array(),0,explorerURL);
 
-        //getBonusData();
+        getBonusData();
         
         // get converted USDT 
         const getUSDTAmt = await readContract({
