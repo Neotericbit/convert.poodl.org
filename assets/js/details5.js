@@ -146,8 +146,7 @@ const wagmiConfig = createConfig({
     });
  
     async function init(){
-
-    
+        
       if(useraddress!= null) {
 
         const getpckLength = await readContract({
@@ -351,7 +350,7 @@ const wagmiConfig = createConfig({
 
         var profitData = "";
              
-        if(bonusDetails.pendingBonus >0 || bonusDetails.claimedBonus>0)
+        if(bonusDetails.pendingBonus >0)
         {
 
             var bonusAmt = Number(bonusDetails.pendingBonus) / Math.pow(10, decimals);
@@ -465,6 +464,11 @@ const wagmiConfig = createConfig({
 
                   $("#commissionTable").html(commData);
 
+                  var strTotals ="";
+                  strTotals += 'Total Commission : <span id="totalCommAmt">'+refereeCommission +' ' +symbol  + ' '+ '<button type="button" class="btn btn-outline-danger staking-pink" id="claimall" >Claim Total Commission</button>'+' </span>'
+                  
+                  $("#total-commission-tab").html(strTotals);
+
 
             }  else{
 
@@ -503,21 +507,10 @@ const wagmiConfig = createConfig({
                   alertify.alert("Warning" , errorMessage);
               }
 
-            });
-    }
 
-    
-    $('#pills-commission-tab').click(async function(){
-        var strTotals ="";
-        strTotals += 'Total Commission : <span id="totalCommAmt">'+refereeCommission +' ' +symbol  + ' '+ '<button type="button" class="btn btn-outline-danger staking-pink" id="claimall" >Claim Total Commission</button>'+' </span>'
-        $("#total-commission-tab").html(strTotals);
-    });
-    $('#pills-reward-tab').click(async function(){
-        $("#total-commission-tab").html('');
-    });
-    $('#pills-stake-tab').click(async function(){
-        $("#total-commission-tab").html('');
-    });
+            });
+
+    }
 
    $('#readBtn').on('click', async function () {
       try {
