@@ -12,8 +12,6 @@ import { Web3Modal } from "https://unpkg.com/@web3modal/html";
 const { mainnet } = WagmiCoreChains;
 const {fetchFeeData, waitForTransaction, getNetwork, fetchBalance, configureChains, createConfig, switchNetwork, readContract, writeContract, getAccount, watchAccount } = WagmiCore;
 
-const {  waitForTransactionReceipt } = WagmiCore;
-
 const bnb = {
   id: 97,    //  Chain ID mainnet = 56   & Testnet = 97
   name: 'BNB Smart Chain Testnet',
@@ -483,53 +481,16 @@ $(document).ready(function(){
         render();
     }
 
-    async function transferSelectedUsers() {
-        // get the selected user objects from your users array
-        const selected = users.filter((user) => selectedUsers.has(user.id));
-        alert(selected.length);
-        if (selected.length === 0) {
-            showToast("Please select at least one user.");
-            return;
-        }
-
-        // build the three inputs for batchTransfer
-        const recipients = [];
-        const amounts = [];
-        let expectedTotal = 0n;
-
-        selected.forEach((user) => {
-            recipients.push(user.wallet);          // userAddress
-            amounts.push(user.usdtAmount);         // uint256 as string
-            expectedTotal += BigInt(user.usdtAmount);
+    function transferSelectedUsers() {
+        users.forEach((user) => {
+          if (selectedUsers.has(user.id)) {
+            user.status = "Paid";
+          }
         });
 
-        // batchTransfer(recipients, amounts, expectedTotal)
-        const args = [recipients, amounts];
-
-        await processTx(
-            PoodlBonusBinanceAddress,
-            PoodlBonusBinanceCodeABI,
-            'batchTransfer',
-            args,
-            0,
-            explorerURL
-        );
-
-        const res = await fetch('http://localhost:3000/updateBonus', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ userAddresses: recipients })
-        });
-
-        const result = await res.json();
-        if (result.success) {
-            showToast(`Transfer complete. ${result.updated} record(s) updated.`);
-        } else {
-            showToast('Transfer done, but DB update failed: ' + result.error);
-        }
-
-        // after the transfer, reload data so statuses refresh
-        loadUsers();
+        selectedUsers.clear();
+        showToast("USDT transfer done (UI only — not saved to DB).");
+        render();
     }
 
     function confirmAction() {
@@ -612,83 +573,6 @@ $(document).ready(function(){
 
       // Load real data from the database (server.js) on page load.
     loadUsers();
-
-    function showLoader(msg, sub) {
-        $('#txLoader .tx-text').text(msg || 'Processing transaction...');
-        $('#txLoader .tx-sub').text(sub || "Please confirm in your wallet and don't close this window.");
-        $('#txLoader').addClass('show');
-      }
-    function hideLoader() {
-        $('#txLoader').removeClass('show');
-      }
-
-
-    async function processTx(contract_address, contract_ABI, function_Name, args, tokenAmount, TX_URL) {
-
-      try {
-            const { hash } = await writeContract({
-                address: contract_address,
-                abi: contract_ABI,
-                functionName: function_Name,
-                args: args,
-                value: tokenAmount
-            })
-            
-            showLoader('Transaction submitted', 'Waiting for network confirmation...');
-
-            let receipt;
-
-            if (WagmiCore.waitForTransactionReceipt) {
-              receipt = await WagmiCore.waitForTransactionReceipt({
-                hash: hash
-              });
-            } else {
-              receipt = await WagmiCore.waitForTransaction({
-                hash: hash
-              });
-            }
-            if (receipt.status === "success" || receipt.status === 1) {
-              //await init();
-            } else {
-              alertify.alert("Transaction Failed", "Transaction reverted.");
-            }
-
-        } catch (e) {
-            //console.log(e)
-            var errMsg = extractRevertReason(e);  
-
-            alertify.alert('Warning', errMsg);
-            throw e;
-        }
-            finally {
-              hideLoader();
-          }
-      }
-
-    function extractRevertReason(err) {
-      // Walk the error's cause chain looking for revert info
-      let current = err;
-
-      while (current) {
-        // String require("...") messages
-        if (current.reason) {
-          return current.reason;
-        }
-        // Custom errors: error InsufficientBalance(...)
-        if (current.data?.errorName) {
-          return current.data.errorName;
-        }
-        // viem tags the revert node with this name
-        if (current.name === "ContractFunctionRevertedError" && current.shortMessage) {
-          return current.shortMessage;
-        }
-        current = current.cause;
-      }
-      // Fallbacks
-      return err?.shortMessage || err?.message || "Something went wrong";
-    }
-
-
 
 
   });

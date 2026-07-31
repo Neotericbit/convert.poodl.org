@@ -3,7 +3,7 @@ var isLoggedIn = false;
  //validator/staking contract address
   //var contractAddress = '0x27011282CA98553523C381EB7B2E83217250408A';
    var contractAddress ='0x000000000000000000000000000000000000F000';
-   var PoodlBonusBinanceAddress ='0xAABC2B5A6a82d6e598816854989d3100F112f649';
+   // var PoodlBonusBinance ='0x6cF17BB424E8dca7f0195e873d67D7C5314EFe47';
 	const explorerURL =   'https://testnet.bscscan.com'; //testnet  , 'https://bscscan.com';  // mainnet  
     const CHAIN_ID = 97;   // BSC mainnet = 56, testnet = 97
     const chainName = 'BNB Smart Chain Testnet';  //  'BNB Smart Chain'; 
@@ -16,7 +16,7 @@ var isLoggedIn = false;
     const gasLimit = gas_limit.toString();
  
  
-    var PoodlBonusBinanceCodeABI = JSON.parse('[{"inputs":[{"internalType":"address","name":"usdtAddress","type":"address"}],"stateMutability":"nonpayable","type":"constructor"},{"inputs":[{"internalType":"address","name":"owner","type":"address"}],"name":"OwnableInvalidOwner","type":"error"},{"inputs":[{"internalType":"address","name":"account","type":"address"}],"name":"OwnableUnauthorizedAccount","type":"error"},{"inputs":[{"internalType":"address","name":"token","type":"address"}],"name":"SafeERC20FailedOperation","type":"error"},{"anonymous":false,"inputs":[{"indexed":false,"internalType":"uint256","name":"recipients","type":"uint256"},{"indexed":false,"internalType":"uint256","name":"totalAmount","type":"uint256"}],"name":"BatchPaid","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"to","type":"address"},{"indexed":false,"internalType":"uint256","name":"amount","type":"uint256"}],"name":"BonusPaid","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"from","type":"address"},{"indexed":false,"internalType":"uint256","name":"amount","type":"uint256"}],"name":"Funded","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"previousOwner","type":"address"},{"indexed":true,"internalType":"address","name":"newOwner","type":"address"}],"name":"OwnershipTransferred","type":"event"},{"inputs":[{"internalType":"uint256","name":"amount","type":"uint256"}],"name":"addUSDTFund","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address[]","name":"recipients","type":"address[]"},{"internalType":"uint256[]","name":"amounts","type":"uint256[]"}],"name":"batchTransfer","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"contractBalance","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"owner","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"renounceOwnership","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"newOwner","type":"address"}],"name":"transferOwnership","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"usdt","outputs":[{"internalType":"contract IERC20","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"amount","type":"uint256"}],"name":"withdraw","outputs":[],"stateMutability":"nonpayable","type":"function"}]');
+    //var PoodlBonusBinanceCodeABI = JSON.parse('');
 
 async function addNetwork() {
 if (window.ethereum) {

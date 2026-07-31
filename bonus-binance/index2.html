@@ -786,39 +786,6 @@
           justify-content: center;
         }
       }
-
-        #txLoader {
-          display: none;
-          position: fixed;
-          inset: 0;
-          z-index: 99999;
-          background: rgba(0, 0, 0, 0.45);
-          backdrop-filter: blur(6px);
-          -webkit-backdrop-filter: blur(6px);
-          align-items: center;
-          justify-content: center;
-        }
-        #txLoader.show { display: flex; }
-
-        .tx-box {
-          background: #fff;
-          padding: 30px 40px;
-          border-radius: 12px;
-          text-align: center;
-          box-shadow: 0 10px 40px rgba(0,0,0,.3);
-          max-width: 90%;
-        }
-        .tx-spinner {
-          width: 48px; height: 48px;
-          margin: 0 auto 18px;
-          border: 5px solid #eee;
-          border-top-color: #4b7bec;
-          border-radius: 50%;
-          animation: txspin 0.9s linear infinite;
-        }
-        @keyframes txspin { to { transform: rotate(360deg); } }
-        .tx-text { font-size: 17px; font-weight: 600; color: #222; }
-        .tx-sub  { font-size: 13px; color: #777; margin-top: 6px; }
     </style>
   </head>
 
@@ -1015,14 +982,6 @@
         </div>
       </div>
     </footer>
-
-     <div id="txLoader">
-      <div class="tx-box">
-        <div class="tx-spinner"></div>
-        <div class="tx-text">Processing transaction...</div>
-        <div class="tx-sub">Please confirm in your wallet and don't close this window.</div>
-      </div>
-    </div>
 
     <script>
  
