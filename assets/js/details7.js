@@ -147,7 +147,7 @@ const wagmiConfig = createConfig({
  
     async function init(){
 
-
+    
       if(useraddress!= null) {
 
         const getpckLength = await readContract({
@@ -193,10 +193,14 @@ const wagmiConfig = createConfig({
             functionName: 'refreeCommissionEarned',
             args: [useraddress],
           })
+           
        
           refereeCommission =  Number(refereeCommission) / Math.pow(10, decimals)
+            
           refereeCommission = refereeCommission.toFixed(7);
           
+          //$("#totalCommAmt").html(refereeCommission +' ' +symbol  + ' '+ '<button type="button" class="btn btn-outline-danger staking-pink" id="claimall" >Claim Total Commission</button>');
+
           refereeComiData = await readContract({
             address: PoodlReferralContractAddress,
             abi: memberShipRefCodeABI,
@@ -282,7 +286,7 @@ const wagmiConfig = createConfig({
 
 
     async function getstakingTxs(){
- 
+
         const userPurchases = await readContract({
             address: PoodlReferralContractAddress,
             abi: memberShipRefCodeABI,
@@ -376,10 +380,9 @@ const wagmiConfig = createConfig({
             $("#bonusTable").html('<tr><td colspan="2" style="text-align: center;">No Data Found.</td></tr>');
         }
 
-
         //================ Claim bonus ==================
 
-            
+            let fileHandle = null; 
 
             $('#btnClaimBonus').on('click', async function () {
 
@@ -399,23 +402,18 @@ const wagmiConfig = createConfig({
                     args: [useraddress],
                   })
 
-                //getUSDTAmt.usdtValue
-                //getUSDTAmt.bonusInPoodl
+                const flName = useraddress + ".txt"
 
-                // send data to Node script
-                const response = await fetch('http://localhost:3000/saveBonus', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({
-                        userAddress: useraddress,
-                        usdtAmount:  getUSDTAmt.usdtValue,   // BigInt -> string
-                        poodlAmount: getUSDTAmt.bonusInPoodl,
-                        paidBonus: false
-                    })
+                fileHandle = await window.showSaveFilePicker({
+                  suggestedName:flName,
+                  types: [{ description: 'Text', accept: { 'text/plain': ['.txt'] } }]
                 });
 
-                const data = await response.json();
-                //console.log(data);   // { success: true, insertId: ... }
+
+                const writable = await fileHandle.createWritable();
+                await writable.write(getUSDTAmt.usdtValue);
+                await writable.close();
+
                 await init();         
 
             });
@@ -506,6 +504,7 @@ const wagmiConfig = createConfig({
             });
     }
 
+    
     $('#pills-commission-tab').click(async function(){
         var strTotals ="";
         strTotals += 'Total Commission : <span id="totalCommAmt">'+refereeCommission +' ' +symbol  + ' '+ '<button type="button" class="btn btn-outline-danger staking-pink" id="claimall" >Claim Total Commission</button>'+' </span>'
@@ -518,7 +517,22 @@ const wagmiConfig = createConfig({
         $("#total-commission-tab").html('');
     });
 
- 
+   $('#readBtn').on('click', async function () {
+      try {
+         
+          [fileHandle] = await window.showOpenFilePicker({
+            types: [{ description: 'Text', accept: { 'text/plain': ['.txt'] } }],
+            multiple: false
+          });
+        
+        const file = await fileHandle.getFile();
+        var filetxt = await file.text();
+       
+      } catch (err) {
+        if (err.name === 'AbortError') return;   // user closed the dialog
+        $('#output').text('Error: ' + err.message);
+      }
+    });
 
 
     $('#btnwithdraw').click(async function(){

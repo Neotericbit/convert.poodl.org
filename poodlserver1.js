@@ -10,7 +10,7 @@ app.use(express.json());
 const pool = mysql.createPool({
   host: 'localhost',
   user: 'root',
-  password: '',
+  password: 'CitAd31l#FotesSsS,#KabEe',
   database: 'poodlmembership',
   waitForConnections: true,
   connectionLimit: 10,
@@ -53,33 +53,5 @@ app.get('/getBonus', async (req, res) => {
     res.status(500).json({ error: 'Database error' });
   }
 });
-
-
-// --- FETCH: update for one user address ---
-app.post('/updateBonus', async (req, res) => {
-  try {
-    const { userAddresses } = req.body;   // expect an array of addresses
-
-    if (!Array.isArray(userAddresses) || userAddresses.length === 0) {
-      return res.status(400).json({ error: 'userAddresses array is required' });
-    }
-
-    // Build the right number of placeholders: (?, ?, ?)
-    const placeholders = userAddresses.map(() => '?').join(', ');
-
-    const [result] = await pool.execute(
-      `UPDATE poodlbonus
-         SET paidBonus = 1
-       WHERE userAddress IN (${placeholders})`,
-      userAddresses
-    );
-
-    res.json({ success: true, updated: result.affectedRows });
-  } catch (err) {
-    console.error('Update error:', err);
-    res.status(500).json({ error: 'Database error' });
-  }
-});
-
 
 app.listen(3000, () => console.log('Server running on http://localhost:3000'));
