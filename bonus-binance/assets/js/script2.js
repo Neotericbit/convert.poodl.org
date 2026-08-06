@@ -486,7 +486,7 @@ $(document).ready(function(){
     async function transferSelectedUsers() {
         // get the selected user objects from your users array
         const selected = users.filter((user) => selectedUsers.has(user.id));
-        
+        alert(selected.length);
         if (selected.length === 0) {
             showToast("Please select at least one user.");
             return;
