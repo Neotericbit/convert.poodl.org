@@ -147,6 +147,7 @@ const wagmiConfig = createConfig({
  
     async function init(){
 
+
       if(useraddress!= null) {
 
         const getpckLength = await readContract({
@@ -250,12 +251,6 @@ const wagmiConfig = createConfig({
         return neg ? -result : result;
       }
 
-    function solidityTimestampToDate(timestamp) {
-      // Convert BigNumber/string to number, then seconds -> ms
-      const ms = Number(timestamp) * 1000;
-      return new Date(ms);
-    }
-
 
      function showLoader(msg, sub) {
         $('#txLoader .tx-text').text(msg || 'Processing transaction...');
@@ -343,14 +338,6 @@ const wagmiConfig = createConfig({
     }
     async function getBonusData(){
 
-        // get claimed bonus data
-        const claimedBonusData = await readContract({
-            address: PoodlReferralContractAddress,
-            abi: memberShipRefCodeABI,
-            functionName: 'getBonusClaims',
-            args: [useraddress],
-          })
-
         const bonusDetails = await readContract({
             address: PoodlReferralContractAddress,
             abi: memberShipRefCodeABI,
@@ -378,9 +365,7 @@ const wagmiConfig = createConfig({
 
             profitData+='<tr>'+
                     '<td><span id="bonusAmt" >'+bonusAmt+'</span> ' +symbol+'</td>'+
-                    '<td> '+solidityTimestampToDate(bonusDetails.bonusDate)+' </td>'+
                     '<td>'+bonusClaimAmt+' ' +symbol+'</td>'+
-                    '<td> '+solidityTimestampToDate(claimedBonusData.claimedDateTime)+' </td>'+
                     '<td>'+bonusButtonTD+'  </td>'+
                 '</tr>';
          
@@ -388,7 +373,7 @@ const wagmiConfig = createConfig({
             $("#bonusTable").html(profitData);
         
         }  else{
-            $("#bonusTable").html('<tr><td colspan="5" style="text-align: center;">No Data Found.</td></tr>');
+            $("#bonusTable").html('<tr><td colspan="2" style="text-align: center;">No Data Found.</td></tr>');
         }
 
 
@@ -470,9 +455,7 @@ const wagmiConfig = createConfig({
 
                      
                     commData+='<tr>'+
-                                '<td>'+commamount+' ' +symbol+'</td>'+
-                                '<td> '+solidityTimestampToDate(refereeComiData.commDate)+' </td>'+
-                                commissionTD+
+                                '<td>'+commamount+' ' +symbol+'</td>'+commissionTD+
                             '</tr>';
 
                   }
@@ -486,7 +469,7 @@ const wagmiConfig = createConfig({
             }  else{
 
                 $("#total-commission-tab").html("Total Commission : 0.0000"+' ' +symbol);
-                $("#commissionTable").html('<tr><td colspan="3" style="text-align: center;">No Data Found.</td></tr>');
+                $("#commissionTable").html('<tr><td colspan="2" style="text-align: center;">No Data Found.</td></tr>');
             }
 
 
@@ -536,6 +519,8 @@ const wagmiConfig = createConfig({
     });
 
  
+
+
     $('#btnwithdraw').click(async function(){
         const account = getAccount();
         const useraddress = account.address;

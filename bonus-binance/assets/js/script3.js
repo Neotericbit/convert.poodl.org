@@ -87,7 +87,6 @@ $(document).ready(function(){
     var account = getAccount();
     var useraddress = account.address;
 
-
    if (typeof window.ethereum !== 'undefined') {
         //  Detect account change (works with MetaMask directly)
         ethereum.on('accountsChanged', function (accounts) {
@@ -97,8 +96,6 @@ $(document).ready(function(){
             } else {
                 //alert("No account connected");
             }
-
-            checkOwnerAccess();
         });
 
         // Detect chain change
@@ -107,8 +104,6 @@ $(document).ready(function(){
             ethereum.request({ method: 'eth_requestAccounts' }).then((accounts) => {
                 if (accounts.length > 0) {
                     useraddress = accounts[0];
-
-                    checkOwnerAccess();
                 }
             });
         });
@@ -120,8 +115,6 @@ $(document).ready(function(){
             const accounts = await ethereum.request({ method: 'eth_requestAccounts' });
             if (accounts.length > 0) {
                 useraddress = accounts[0];
-
-                checkOwnerAccess();
             }
         } catch (err) {
             console.log("User rejected connection or error:", err);
@@ -137,29 +130,6 @@ $(document).ready(function(){
         }
     });
 
-
-    async function checkOwnerAccess() {
-    try {
-            const ownerAddress = await readContract({
-                address: PoodlBonusBinanceAddress,
-                abi: PoodlBonusBinanceCodeABI,
-                functionName: 'owner',
-                args: [],
-            });
-
-            alert(ownerAddress);
-
-            if(ownerAddress.toLowerCase() != useraddress.toLowerCase()){
-                window.location.href = "https://convert.poodl.org/";
-                //window.location.href = "http://localhost/poodlmembership/";
-            }
-
-            // proceed with comparison here
-        } catch (error) {
-            console.error("Error reading contract owner:", error);
-        }
-    }
-
   // Rows loaded from the database via the Node script.
       // Each row shape: { id, wallet, usdtAmount, poodlAmount, payDate, status }
       let users = [];
@@ -169,10 +139,6 @@ $(document).ready(function(){
 
       // Fetch all bonus rows from the database and normalise them for the UI.
     async function loadUsers() {
-        
-        checkOwnerAccess();
-        
-
         try {
           const res = await fetch(API_BASE + "/getBonus");
           const result = await res.json();
