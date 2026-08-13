@@ -3,8 +3,8 @@ var isLoggedIn = false;
  //validator/staking contract address
   //var contractAddress = '0x27011282CA98553523C381EB7B2E83217250408A';
    var contractAddress ='0x000000000000000000000000000000000000F000';
-    var PoodlReferralContractAddress ='0x25a9dcdB37a3116277DE74CeA526df444750792d';
-	const explorerURL = 'https://explorer.poodl.org'; // explorer url
+    var PoodlReferralContractAddress ='0xf54c28b17f5B4c17CA8d377c64751717f4D8Fcfa';
+    const explorerURL = 'https://explorer.poodl.org'; // explorer url
     const CHAIN_ID = 15259; //chain id of specific chain
     const chainName = 'POODL Network';
     const decimals = 18;
