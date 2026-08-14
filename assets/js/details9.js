@@ -147,8 +147,6 @@ const wagmiConfig = createConfig({
  
     async function init(){
 
-       
-
       if(useraddress!= null) {
 
         const getpckLength = await readContract({
@@ -255,7 +253,7 @@ const wagmiConfig = createConfig({
     function solidityTimestampToDate(timestamp) {
       // Convert BigNumber/string to number, then seconds -> ms
       const ms = Number(timestamp) * 1000;
-      return dayjs(ms).format('MMM Do YYYY, h:mm:ss a');
+      return new Date(ms);
     }
 
 
@@ -358,9 +356,7 @@ const wagmiConfig = createConfig({
             abi: memberShipRefCodeABI,
             functionName: 'getReferralStats',
             args: [useraddress],
-        })
-
-        $("#uniqueUserCnt").html('Referral code has been used = ' + bonusDetails.uniqueUserCount + ' times');
+          })
 
         var profitData = "";
              
@@ -471,11 +467,11 @@ const wagmiConfig = createConfig({
                         } else {
                           commissionTD ='<td> <i   aria-hidden="true">Commission Claimed</i></td> ';
                         }
-                         
+
                      
                     commData+='<tr>'+
                                 '<td>'+commamount+' ' +symbol+'</td>'+
-                                '<td> '+solidityTimestampToDate(refereeComiData[i].commDate)+' </td>'+
+                                '<td> '+solidityTimestampToDate(refereeComiData.commDate)+' </td>'+
                                 commissionTD+
                             '</tr>';
 

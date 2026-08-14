@@ -178,11 +178,6 @@
         @keyframes txspin { to { transform: rotate(360deg); } }
         .tx-text { font-size: 17px; font-weight: 600; color: #222; }
         .tx-sub  { font-size: 13px; color: #777; margin-top: 6px; }
-
-        #uniqueUserCnt{
-          font-size: 22px;
-        }
-
     </style>
   </head>
   <body>
@@ -405,7 +400,6 @@
               aria-labelledby="pills-reward-tab"
             >
               <div class="stak-table card">
-                <span id="uniqueUserCnt" ></span>
                 <table class="table">
                   <thead>
                     <tr>
@@ -543,17 +537,11 @@
     <!-- <script src="https://cdn.jsdelivr.net/gh/ethereum/web3.js@3.0.0/dist/web3.min.js"></script> -->
     <!-- <script src="https://cdn.jsdelivr.net/npm/web3@latest/dist/web3.min.js"></script> -->
     <script src="assets/js/alertify.js"></script>
-    <script src="assets/js/general.js?v=0.0.26"></script>
+    <script src="assets/js/general.js?v=0.0.24"></script>
     <script>
       // Required by some npm packages
       window.process = { browser: true, env: { ENVIRONMENT: "BROWSER" } };
     </script>
-    <script src="assets/js/details.js?v=0.0.26" type="module"></script>
-
-    <script src="https://cdn.jsdelivr.net/npm/dayjs@1/dayjs.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/dayjs@1/plugin/advancedFormat.js"></script>
-    <script>
-      dayjs.extend(dayjs_plugin_advancedFormat);
-    </script>
+    <script src="assets/js/details.js?v=0.0.24" type="module"></script>
   </body>
 </html>
