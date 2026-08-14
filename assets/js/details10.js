@@ -146,7 +146,9 @@ const wagmiConfig = createConfig({
     });
  
     async function init(){
-   
+
+       
+
       if(useraddress!= null) {
 
         const getpckLength = await readContract({
@@ -360,67 +362,38 @@ const wagmiConfig = createConfig({
 
         $("#uniqueUserCnt").html('Referral code has been used = ' + bonusDetails.uniqueUserCount + ' times');
 
-         
         var profitData = "";
- 
+             
         if(bonusDetails.pendingBonus >0 || bonusDetails.claimedBonus>0)
         {
- 
+
             var bonusAmt = Number(bonusDetails.pendingBonus) / Math.pow(10, decimals);
                 bonusAmt = bonusAmt.toFixed(7);
- 
+
             var bonusClaimAmt = Number(bonusDetails.claimedBonus) / Math.pow(10, decimals);
                 bonusClaimAmt = bonusClaimAmt.toFixed(7);
- 
+
             var bonusButtonTD="";
             if(bonusDetails.pendingBonus>0){
                     bonusButtonTD='<a href="#" id="btnClaimBonus" type="button" class="claimcommission"  ><i   aria-hidden="true">Claim Bonus</i></a> ';
                 } else {
                     bonusButtonTD ='<i   aria-hidden="true">Bonus Claimed</i> ';
             }
- 
+
             profitData+='<tr>'+
                     '<td><span id="bonusAmt" >'+bonusAmt+'</span> ' +symbol+'</td>'+
                     '<td> '+solidityTimestampToDate(bonusDetails.bonusDate)+' </td>'+
                     '<td>'+bonusClaimAmt+' ' +symbol+'</td>'+
+                    '<td> '+solidityTimestampToDate(claimedBonusData.claimedDateTime)+' </td>'+
                     '<td>'+bonusButtonTD+'  </td>'+
                 '</tr>';
- 
-             $("#bonusTable").html(profitData);
- 
+         
+            
+            $("#bonusTable").html(profitData);
+        
         }  else{
-            $("#bonusTable").html('<tr><td colspan="4" style="text-align: center;">No Data Found.</td></tr>');
+            $("#bonusTable").html('<tr><td colspan="5" style="text-align: center;">No Data Found.</td></tr>');
         }
- 
-        //================ Claim history table (#bonusClaimsTable) ================
-        // One row per BonusClaim — POODL amount, USDT value, and when it was claimed.
- 
-        var claimsData = "";
- 
-        if(claimedBonusData.length > 0)
-        {
-            for (var i = 0; i < claimedBonusData.length; i++) {
- 
-                var claimPoodl = Number(claimedBonusData[i].bonusInPoodl) / Math.pow(10, decimals);
-                claimPoodl = claimPoodl.toFixed(7);
- 
-                var claimUsdt = Number(claimedBonusData[i].usdtValue) / Math.pow(10, 18);
-                claimUsdt = claimUsdt.toFixed(7);
- 
-                claimsData+='<tr>'+
-                        '<td>'+claimPoodl+' ' +symbol+'</td>'+
-                        '<td>'+claimUsdt+' USDT</td>'+
-                        '<td> '+solidityTimestampToDate(claimedBonusData[i].claimedDateTime)+' </td>'+
-                    '</tr>';
-            }
- 
-            $("#bonusClaimsTable").html(claimsData);
- 
-        } else {
-            $("#bonusClaimsTable").html('<tr><td colspan="3" style="text-align: center;">No Data Found.</td></tr>');
-        }
- 
-
 
 
         //================ Claim bonus ==================
@@ -466,6 +439,7 @@ const wagmiConfig = createConfig({
 
             });
 
+       
     }
     async function getCommissionTxs(){
 
