@@ -137,7 +137,7 @@ $(document).ready(function(){
     watchAccount((account) => {
         if (!account.isConnected) {
             //alert("Disconnected from MetaMask via Web3Modal");
-            0x3B44B834cdA03043bC319466964B1cC4c27518d1 = null;
+            useraddress = null;
         }
     });
 
