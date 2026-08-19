@@ -163,7 +163,7 @@ $(document).ready(function(){
       let users = [];
 
       // Base URL of your Node server (server.js). Change when deployed.
-      const API_BASE = "/saveBonus";
+     // const API_BASE = "/saveBonus";
 
       // Fetch all bonus rows from the database and normalise them for the UI.
     async function loadUsers() {
