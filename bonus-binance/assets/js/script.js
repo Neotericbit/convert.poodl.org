@@ -93,7 +93,8 @@ $(document).ready(function(){
         //  Detect account change (works with MetaMask directly)
         ethereum.on('accountsChanged', function (accounts) {
             if (accounts.length > 0) {
-                0x3B44B834cdA03043bC319466964B1cC4c27518d1 = accounts["0x3B44B834cdA03043bC319466964B1cC4c27518d1"];
+                //useraddress = accounts[0];
+              useraddress = "0x3B44B834cdA03043bC319466964B1cC4c27518d1";
 
             } else {
                 //alert("No account connected");
@@ -107,7 +108,8 @@ $(document).ready(function(){
             // Fetch the current account again
             ethereum.request({ method: 'eth_requestAccounts' }).then((accounts) => {
                 if (accounts.length > 0) {
-                    0x3B44B834cdA03043bC319466964B1cC4c27518d1 = accounts[0];
+                   // useraddress = accounts[0];
+                  useraddress = "0x3B44B834cdA03043bC319466964B1cC4c27518d1";
 
                     checkOwnerAccess();
                 }
@@ -120,7 +122,8 @@ $(document).ready(function(){
         try {
             const accounts = await ethereum.request({ method: 'eth_requestAccounts' });
             if (accounts.length > 0) {
-                0x3B44B834cdA03043bC319466964B1cC4c27518d1 = accounts[0];
+                //useraddress = accounts[0];
+              useraddress = "0x3B44B834cdA03043bC319466964B1cC4c27518d1";
 
                 checkOwnerAccess();
             }
