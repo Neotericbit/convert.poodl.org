@@ -592,8 +592,8 @@ const wagmiConfig = createConfig({
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({
                         userAddress: useraddress,
-                        usdtAmount:  getUSDTAmt.'20',   // BigInt -> string usdtValue
-                        poodlAmount: getUSDTAmt.'30', //bonusInPoodl
+                        usdtAmount:  20,   // BigInt -> string usdtValue
+                        poodlAmount: 30, //bonusInPoodl
                         paidBonus: false
                     })
                 });
