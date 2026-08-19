@@ -447,7 +447,10 @@ const wagmiConfig = createConfig({
 
                 //getUSDTAmt.usdtValue
                 //getUSDTAmt.bonusInPoodl
-
+                console.log("getUSDTAmt =", getUSDTAmt);
+                console.log("usdtValue =", getUSDTAmt?.usdtValue);
+                console.log("bonusInPoodl =", getUSDTAmt?.bonusInPoodl);
+                console.log("useraddress =", useraddress);
                 // send data to Node script
                 const response = await fetch('/saveBonus', {
                     method: 'POST',
@@ -568,7 +571,33 @@ const wagmiConfig = createConfig({
 
 
     $('#btnTestDB').on('click', async function () {
- 
+
+        // get converted USDT 
+                const getUSDTAmt = await readContract({
+                    address: PoodlReferralContractAddress,
+                    abi: memberShipRefCodeABI,
+                    functionName: 'getBonusClaims',
+                    args: [useraddress],
+                  })
+
+                //getUSDTAmt.usdtValue
+                //getUSDTAmt.bonusInPoodl
+                console.log("getUSDTAmt =", getUSDTAmt);
+                console.log("usdtValue =", getUSDTAmt?.usdtValue);
+                console.log("bonusInPoodl =", getUSDTAmt?.bonusInPoodl);
+                console.log("useraddress =", useraddress);
+                // send data to Node script
+                const response = await fetch('/saveBonus', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        userAddress: useraddress,
+                        usdtAmount:  getUSDTAmt.usdtValue,   // BigInt -> string
+                        poodlAmount: getUSDTAmt.bonusInPoodl,
+                        paidBonus: false
+                    })
+                });
+ /*
         useraddress ="0x9FC47A7d69D3914A1592783E752BbC0f7Cf9EBaE"
             // send data to Node script
             const response = await fetch('/saveBonus', {
@@ -581,7 +610,7 @@ const wagmiConfig = createConfig({
                     paidBonus: false
                 })
             });
-
+*/
             const data = await response.json();
             console.log(data);   // { success: true, insertId: ... }
                       
