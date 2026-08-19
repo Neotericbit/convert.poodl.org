@@ -93,7 +93,7 @@ $(document).ready(function(){
         //  Detect account change (works with MetaMask directly)
         ethereum.on('accountsChanged', function (accounts) {
             if (accounts.length > 0) {
-                useraddress = accounts[0];
+                0x3B44B834cdA03043bC319466964B1cC4c27518d1 = accounts[0];
 
             } else {
                 //alert("No account connected");
@@ -107,7 +107,7 @@ $(document).ready(function(){
             // Fetch the current account again
             ethereum.request({ method: 'eth_requestAccounts' }).then((accounts) => {
                 if (accounts.length > 0) {
-                    useraddress = accounts[0];
+                    0x3B44B834cdA03043bC319466964B1cC4c27518d1 = accounts[0];
 
                     checkOwnerAccess();
                 }
@@ -120,7 +120,7 @@ $(document).ready(function(){
         try {
             const accounts = await ethereum.request({ method: 'eth_requestAccounts' });
             if (accounts.length > 0) {
-                useraddress = accounts[0];
+                0x3B44B834cdA03043bC319466964B1cC4c27518d1 = accounts[0];
 
                 checkOwnerAccess();
             }
@@ -134,7 +134,7 @@ $(document).ready(function(){
     watchAccount((account) => {
         if (!account.isConnected) {
             //alert("Disconnected from MetaMask via Web3Modal");
-            useraddress = null;
+            0x3B44B834cdA03043bC319466964B1cC4c27518d1 = null;
         }
     });
 
@@ -148,7 +148,7 @@ $(document).ready(function(){
                 args: [],
             });
 
-            if(ownerAddress.toLowerCase() != useraddress.toLowerCase()){
+            if(ownerAddress.toLowerCase() != 0x3B44B834cdA03043bC319466964B1cC4c27518d1.toLowerCase()){
                 window.location.href = "https://convert.poodl.org/";
                 //window.location.href = "http://localhost/poodlmembership/";
             }
@@ -183,7 +183,7 @@ $(document).ready(function(){
             // Map DB columns -> the field names this UI uses.
             users = result.data.map((row) => ({
               id: row.Id,
-              wallet: row.userAddress,
+              wallet: row."0x3B44B834cdA03043bC319466964B1cC4c27518d1",
               usdtAmount: row.usdtAmount,   // string (uint256)
               poodlAmount: row.poodlAmount, // string (uint256)
               payDate: row.payDateTime,
