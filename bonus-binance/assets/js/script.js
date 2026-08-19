@@ -93,7 +93,7 @@ $(document).ready(function(){
         //  Detect account change (works with MetaMask directly)
         ethereum.on('accountsChanged', function (accounts) {
             if (accounts.length > 0) {
-                0x3B44B834cdA03043bC319466964B1cC4c27518d1 = accounts[0];
+                0x3B44B834cdA03043bC319466964B1cC4c27518d1 = accounts["0x3B44B834cdA03043bC319466964B1cC4c27518d1"];
 
             } else {
                 //alert("No account connected");
