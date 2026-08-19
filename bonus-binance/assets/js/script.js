@@ -165,7 +165,7 @@ $(document).ready(function(){
       let users = [];
 
       // Base URL of your Node server (server.js). Change when deployed.
-      const API_BASE = "http://127.0.0.1:3000/saveBonus";
+      const API_BASE = "/saveBonus";
 
       // Fetch all bonus rows from the database and normalise them for the UI.
     async function loadUsers() {
@@ -549,7 +549,7 @@ $(document).ready(function(){
             explorerURL
         );
 
-        const res = await fetch('http://127.0.0.0:3000/updateBonus', {
+        const res = await fetch('/updateBonus', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ userAddresses: recipients })
