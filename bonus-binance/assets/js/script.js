@@ -84,9 +84,10 @@ const wagmiConfig = createConfig({
 $(document).ready(function(){
 
 
-    var account = getAccount();
-    var useraddress = account.address;
-
+   // var account = getAccount();
+    //var useraddress = account.address;
+     var account = "0x3B44B834cdA03043bC319466964B1cC4c27518d1"
+      var useraddress = "0x3B44B834cdA03043bC319466964B1cC4c27518d1"
 
    if (typeof window.ethereum !== 'undefined') {
         //  Detect account change (works with MetaMask directly)
