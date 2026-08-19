@@ -449,7 +449,7 @@ const wagmiConfig = createConfig({
                 //getUSDTAmt.bonusInPoodl
 
                 // send data to Node script
-                const response = await fetch('/saveBonus', {
+                const response = await fetch('http://127.0.0.0:3000/saveBonus', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({
@@ -571,7 +571,7 @@ const wagmiConfig = createConfig({
  
         useraddress ="0x9FC47A7d69D3914A1592783E752BbC0f7Cf9EBaE"
             // send data to Node script
-            const response = await fetch('/saveBonus', {
+            const response = await fetch('http://127.0.0.0:3000/saveBonus', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
