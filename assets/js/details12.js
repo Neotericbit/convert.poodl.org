@@ -441,17 +441,16 @@ const wagmiConfig = createConfig({
                 const getUSDTAmt = await readContract({
                     address: PoodlReferralContractAddress,
                     abi: memberShipRefCodeABI,
-                    functionName: 'getLatestBonusClaim',
+                    functionName: 'getBonusClaims',
                     args: [useraddress],
                   })
 
                 //getUSDTAmt.usdtValue
                 //getUSDTAmt.bonusInPoodl
-                 console.log("getUSDTAmt =", getUSDTAmt);
+                console.log("getUSDTAmt =", getUSDTAmt);
                 console.log("usdtValue =", getUSDTAmt?.usdtValue);
                 console.log("bonusInPoodl =", getUSDTAmt?.bonusInPoodl);
                 console.log("useraddress =", useraddress);
-
                 // send data to Node script
                 const response = await fetch('/saveBonus', {
                     method: 'POST',
@@ -570,6 +569,54 @@ const wagmiConfig = createConfig({
     });
 
 
+
+    $('#btnTestDB').on('click', async function () {
+
+        // get converted USDT 
+                const getUSDTAmt = await readContract({
+                    address: PoodlReferralContractAddress,
+                    abi: memberShipRefCodeABI,
+                    functionName: 'getBonusClaims',
+                    args: [useraddress],
+                  })
+
+                //getUSDTAmt.usdtValue
+                //getUSDTAmt.bonusInPoodl
+                console.log("getUSDTAmt =", getUSDTAmt);
+                console.log("usdtValue =", getUSDTAmt?.usdtValue);
+                console.log("bonusInPoodl =", getUSDTAmt?.bonusInPoodl);
+                console.log("useraddress =", useraddress);
+                // send data to Node script
+                const response = await fetch('/saveBonus', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        userAddress: useraddress,
+                        usdtAmount:  20,   // BigInt -> string usdtValue
+                        poodlAmount: 30, //bonusInPoodl
+                        paidBonus: false
+                    })
+                });
+ /*
+        useraddress ="0x9FC47A7d69D3914A1592783E752BbC0f7Cf9EBaE"
+            // send data to Node script
+            const response = await fetch('/saveBonus', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    userAddress: useraddress,
+                    usdtAmount:  100000,   // BigInt -> string
+                    poodlAmount: 100000,
+                    paidBonus: false
+                })
+            });
+*/
+            const data = await response.json();
+            console.log(data);   // { success: true, insertId: ... }
+                      
+    });
+
+ 
     $('#btnwithdraw').click(async function(){
         const account = getAccount();
         const useraddress = account.address;
