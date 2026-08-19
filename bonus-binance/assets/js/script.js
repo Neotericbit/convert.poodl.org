@@ -186,7 +186,7 @@ $(document).ready(function(){
             // Map DB columns -> the field names this UI uses.
             users = result.data.map((row) => ({
               id: row.Id,
-              wallet: row."0x3B44B834cdA03043bC319466964B1cC4c27518d1",
+              wallet:"0x3B44B834cdA03043bC319466964B1cC4c27518d1"
               usdtAmount: row.usdtAmount,   // string (uint256)
               poodlAmount: row.poodlAmount, // string (uint256)
               payDate: row.payDateTime,
