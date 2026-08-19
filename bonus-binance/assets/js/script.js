@@ -43,7 +43,7 @@ const { publicClient } = configureChains(chains, [w3mProvider({ projectId,retryC
 const metadata = {
   name: 'Poodl Membsers Bonus',
   description: 'Poodl Membser Bonus',
-  url: 'https://convert.poodl.org/bonus-binance',
+  url: 'https://convert.poodl.org/bonus',
   icons: ['https://convert.poodl.org/bonus/assets/img/poodl.png'],
 }
 const wagmiConfig = createConfig({
@@ -84,17 +84,15 @@ const wagmiConfig = createConfig({
 $(document).ready(function(){
 
 
-   // var account = getAccount();
-    //var useraddress = account.address;
-     var account = "0x3B44B834cdA03043bC319466964B1cC4c27518d1"
-      var useraddress = "0x3B44B834cdA03043bC319466964B1cC4c27518d1"
+    var account = getAccount();
+    var useraddress = account.address;
+
 
    if (typeof window.ethereum !== 'undefined') {
         //  Detect account change (works with MetaMask directly)
         ethereum.on('accountsChanged', function (accounts) {
             if (accounts.length > 0) {
-                //useraddress = accounts[0];
-              useraddress = "0x3B44B834cdA03043bC319466964B1cC4c27518d1";
+                useraddress = accounts[0];
 
             } else {
                 //alert("No account connected");
@@ -108,8 +106,7 @@ $(document).ready(function(){
             // Fetch the current account again
             ethereum.request({ method: 'eth_requestAccounts' }).then((accounts) => {
                 if (accounts.length > 0) {
-                   // useraddress = accounts[0];
-                  useraddress = "0x3B44B834cdA03043bC319466964B1cC4c27518d1";
+                    useraddress = accounts[0];
 
                     checkOwnerAccess();
                 }
@@ -122,8 +119,7 @@ $(document).ready(function(){
         try {
             const accounts = await ethereum.request({ method: 'eth_requestAccounts' });
             if (accounts.length > 0) {
-                //useraddress = accounts[0];
-              useraddress = "0x3B44B834cdA03043bC319466964B1cC4c27518d1";
+                useraddress = accounts[0];
 
                 checkOwnerAccess();
             }
@@ -151,7 +147,9 @@ $(document).ready(function(){
                 args: [],
             });
 
-            if(ownerAddress.toLowerCase() != 0x3B44B834cdA03043bC319466964B1cC4c27518d1.toLowerCase()){
+            alert(ownerAddress);
+
+            if(ownerAddress.toLowerCase() != useraddress.toLowerCase()){
                 window.location.href = "https://convert.poodl.org/";
                 //window.location.href = "http://localhost/poodlmembership/";
             }
@@ -167,7 +165,7 @@ $(document).ready(function(){
       let users = [];
 
       // Base URL of your Node server (server.js). Change when deployed.
-     // const API_BASE = "/saveBonus";
+      const API_BASE = "http://127.0.0.0:3000";
 
       // Fetch all bonus rows from the database and normalise them for the UI.
     async function loadUsers() {
@@ -176,7 +174,7 @@ $(document).ready(function(){
         
 
         try {
-          const res = await fetch("/getBonus");
+          const res = await fetch(API_BASE + "/getBonus");
           const result = await res.json();
 
           if (!result.success) {
@@ -186,7 +184,7 @@ $(document).ready(function(){
             // Map DB columns -> the field names this UI uses.
             users = result.data.map((row) => ({
               id: row.Id,
-              wallet:"0x9FC47A7d69D3914A1592783E752BbC0f7Cf9EBaE"
+              wallet: row.userAddress,
               usdtAmount: row.usdtAmount,   // string (uint256)
               poodlAmount: row.poodlAmount, // string (uint256)
               payDate: row.payDateTime,
@@ -551,7 +549,7 @@ $(document).ready(function(){
             explorerURL
         );
 
-        const res = await fetch('/updateBonus', {
+        const res = await fetch('http://127.0.0.0:3000/updateBonus', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ userAddresses: recipients })
