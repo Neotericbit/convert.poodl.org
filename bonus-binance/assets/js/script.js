@@ -174,7 +174,7 @@ $(document).ready(function(){
         
 
         try {
-          const res = await fetch(API_BASE + "/getBonus");
+          const res = await fetch("/getBonus");
           const result = await res.json();
 
           if (!result.success) {
