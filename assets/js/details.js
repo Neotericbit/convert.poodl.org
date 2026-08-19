@@ -146,7 +146,7 @@ const wagmiConfig = createConfig({
     });
  
     async function init(){
-
+   
       if(useraddress!= null) {
 
         const getpckLength = await readContract({
@@ -563,28 +563,6 @@ const wagmiConfig = createConfig({
     });
     $('#pills-stake-tab').click(async function(){
         $("#total-commission-tab").html('');
-    });
-
-
-
-    $('#btnTestDB').on('click', async function () {
- 
-        useraddress ="0x9FC47A7d69D3914A1592783E752BbC0f7Cf9EBaE"
-            // send data to Node script
-            const response = await fetch('/saveBonus', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({
-                    userAddress: useraddress,
-                    usdtAmount:  100000,   // BigInt -> string
-                    poodlAmount: 100000,
-                    paidBonus: false
-                })
-            });
-
-            const data = await response.json();
-            console.log(data);   // { success: true, insertId: ... }
-                      
     });
 
  
