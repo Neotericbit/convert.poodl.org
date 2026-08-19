@@ -43,7 +43,7 @@ const { publicClient } = configureChains(chains, [w3mProvider({ projectId,retryC
 const metadata = {
   name: 'Poodl Membsers Bonus',
   description: 'Poodl Membser Bonus',
-  url: 'https://convert.poodl.org/bonus-binance',
+  url: 'https://convert.poodl.org/bonus',
   icons: ['https://convert.poodl.org/bonus/assets/img/poodl.png'],
 }
 const wagmiConfig = createConfig({
@@ -146,6 +146,8 @@ $(document).ready(function(){
                 functionName: 'owner',
                 args: [],
             });
+
+            alert(ownerAddress);
 
             if(ownerAddress.toLowerCase() != useraddress.toLowerCase()){
                 window.location.href = "https://convert.poodl.org/";
