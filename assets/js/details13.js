@@ -147,8 +147,6 @@ const wagmiConfig = createConfig({
  
     async function init(){
 
-         
-
       if(useraddress!= null) {
 
         const getpckLength = await readContract({
@@ -449,12 +447,10 @@ const wagmiConfig = createConfig({
 
                 //getUSDTAmt.usdtValue
                 //getUSDTAmt.bonusInPoodl
-
-                var poodlAmt = Number(getUSDTAmt.bonusInPoodl) / Math.pow(10, decimals);
-                poodlAmt = poodlAmt.toFixed(7);
-
-                var usdtAmt = Number(getUSDTAmt.usdtValue) / Math.pow(10, decimals);
-                usdtAmt = usdtAmt.toFixed(7);
+                 console.log("getUSDTAmt =", getUSDTAmt);
+                console.log("usdtValue =", getUSDTAmt?.usdtValue);
+                console.log("bonusInPoodl =", getUSDTAmt?.bonusInPoodl);
+                console.log("useraddress =", useraddress);
 
                 // send data to Node script
                 const response = await fetch('/saveBonus', {
@@ -462,8 +458,8 @@ const wagmiConfig = createConfig({
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({
                         userAddress: useraddress,
-                        usdtAmount:  usdtAmt.toString(),   // BigInt -> string
-                        poodlAmount: poodlAmt.toString(),
+                        usdtAmount:  getUSDTAmt.usdtValue.toString(),   // BigInt -> string
+                        poodlAmount: getUSDTAmt.bonusInPoodl.toString(),
                         paidBonus: false
                     })
                 });
