@@ -84,6 +84,43 @@ const wagmiConfig = createConfig({
 $(document).ready(function(){
 
 
+
+   const selectedUsers = new Set();
+      let currentPage = 1;
+      const rowsPerPage = 5;
+      let pendingAction = null;
+
+      const userTable = document.getElementById("userTable");
+      const mobileList = document.getElementById("mobileList");
+      const searchInput = document.getElementById("searchInput1");
+      const statusFilter = document.getElementById("statusFilter");
+      const selectAll = document.getElementById("selectAll");
+
+      const approveBtn = document.getElementById("approveBtn");
+      const transferBtn = document.getElementById("transferBtn");
+      const mobileApproveBtn = document.getElementById("mobileApproveBtn");
+      const mobileTransferBtn = document.getElementById("mobileTransferBtn");
+
+      const selectionInfo = document.getElementById("selectionInfo");
+      const mobileSelectionInfo = document.getElementById(
+        "mobileSelectionInfo",
+      );
+
+      const prevBtn = document.getElementById("prevBtn");
+      const nextBtn = document.getElementById("nextBtn");
+      const pageInfo = document.getElementById("pageInfo");
+
+      const modalOverlay = document.getElementById("modalOverlay");
+      const modalTitle = document.getElementById("modalTitle");
+      const modalMessage = document.getElementById("modalMessage");
+      const cancelModal = document.getElementById("cancelModal");
+      const confirmModal = document.getElementById("confirmModal");
+      const toast = document.getElementById("toast");
+
+      const connectWalletBtn = document.getElementById("connectWalletBtn");
+
+
+
     var account = getAccount();
     var useraddress = account.address;
 
@@ -165,7 +202,7 @@ $(document).ready(function(){
       // Base URL of your Node server (server.js). Change when deployed.
       //const API_BASE = "http://localhost:3000";
 
-      const API_BASE = "https://convert.poodl.org/";
+      const API_BASE = "https://convert.poodl.org";
 
       // Fetch all bonus rows from the database and normalise them for the UI.
     async function loadUsers() {
