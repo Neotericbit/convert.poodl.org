@@ -84,43 +84,6 @@ const wagmiConfig = createConfig({
 $(document).ready(function(){
 
 
-
-   const selectedUsers = new Set();
-      let currentPage = 1;
-      const rowsPerPage = 5;
-      let pendingAction = null;
-
-      const userTable = document.getElementById("userTable");
-      const mobileList = document.getElementById("mobileList");
-      const searchInput = document.getElementById("searchInput");
-      const statusFilter = document.getElementById("statusFilter");
-      const selectAll = document.getElementById("selectAll");
-
-      const approveBtn = document.getElementById("approveBtn");
-      const transferBtn = document.getElementById("transferBtn");
-      const mobileApproveBtn = document.getElementById("mobileApproveBtn");
-      const mobileTransferBtn = document.getElementById("mobileTransferBtn");
-
-      const selectionInfo = document.getElementById("selectionInfo");
-      const mobileSelectionInfo = document.getElementById(
-        "mobileSelectionInfo",
-      );
-
-      const prevBtn = document.getElementById("prevBtn");
-      const nextBtn = document.getElementById("nextBtn");
-      const pageInfo = document.getElementById("pageInfo");
-
-      const modalOverlay = document.getElementById("modalOverlay");
-      const modalTitle = document.getElementById("modalTitle");
-      const modalMessage = document.getElementById("modalMessage");
-      const cancelModal = document.getElementById("cancelModal");
-      const confirmModal = document.getElementById("confirmModal");
-      const toast = document.getElementById("toast");
-
-      const connectWalletBtn = document.getElementById("connectWalletBtn");
-
-
-
     var account = getAccount();
     var useraddress = account.address;
 
@@ -199,10 +162,12 @@ $(document).ready(function(){
       // Each row shape: { id, wallet, usdtAmount, poodlAmount, payDate, status }
       let users = [];
 
-      // Base URL of your Node server (server.js). Change when deployed.
-      //const API_BASE = "http://localhost:3000";
-
-      const API_BASE = "";
+      // Local dev hits Node directly; production uses same-origin paths proxied by nginx.
+      const API_BASE =
+        window.location.hostname === "localhost" ||
+        window.location.hostname === "127.0.0.1"
+          ? "http://localhost:3000"
+          : "";
 
       // Fetch all bonus rows from the database and normalise them for the UI.
     async function loadUsers() {
@@ -213,11 +178,23 @@ $(document).ready(function(){
             return;
         }
         
-        // checkOwnerAccess();
+        checkOwnerAccess();
         
 
         try {
-          const res = await fetch(API_BASE + '/getBonus');
+          const res = await fetch(API_BASE + "/getBonus");
+          const contentType = res.headers.get("content-type") || "";
+
+          if (!res.ok) {
+            throw new Error("Server returned HTTP " + res.status);
+          }
+
+          if (!contentType.includes("application/json")) {
+            throw new Error(
+              "API route not proxied to Node.js. Add nginx rules for /getBonus (see deploy/nginx-bonus-api.conf)."
+            );
+          }
+
           const result = await res.json();
 
           if (!result.success) {
