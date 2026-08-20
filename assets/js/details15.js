@@ -23,6 +23,7 @@ const poodl = {
       decimals: 18,
       name: 'POODL',
       symbol: 'POODL',
+      tokensymbol: 'USDT',
   },
   rpcUrls: {
       default: { http: ['https://rpc.poodl.org'] },
@@ -147,7 +148,7 @@ const wagmiConfig = createConfig({
  
     async function init(){
 
-        useraddress ="0x9FC47A7d69D3914A1592783E752BbC0f7Cf9EBaE"
+         
 
       if(useraddress!= null) {
 
@@ -198,6 +199,7 @@ const wagmiConfig = createConfig({
           refereeCommission =  Number(refereeCommission) / Math.pow(10, decimals)
           refereeCommission = refereeCommission.toFixed(7);
 
+
           var strTotals ="";
             strTotals += 'Total Commission : '+refereeCommission +' ' +symbol  
             $("#total-commission-tab").html(strTotals);
@@ -222,6 +224,7 @@ const wagmiConfig = createConfig({
           $("#stakingsTxTable").html('<tr><td colspan="4" style="text-align: center;">No Data Found.</td></tr>');
           $("#bonusTable").html('<tr><td colspan="2" style="text-align: center;">No Data Found.</td></tr>');
           $("#commissionTable").html('<tr><td colspan="2" style="text-align: center;">No Data Found.</td></tr>');
+
       }
 
     }
@@ -235,19 +238,20 @@ const wagmiConfig = createConfig({
                     alertify.alert('Warning',"Please connect Metamask");
                     return;
                 }
+                
 
-                const res = await fetch("/getTotalUSDTPaid?userAddress=" + encodeURIComponent(userAddr));
-                const result = await res.json();
+            const res = await fetch("/getTotalUSDTPaid?userAddress=" + encodeURIComponent(userAddr));
+            const result = await res.json();
 
-                if (!result.success) {
-                    showToast("Failed to load total paid: " + (result.error || "unknown"));
-                    return null;
-                } else {
-                    const totalPaid = result.data.totalPaid;
-                    $("#totalBonusPaid").html("Total bonus paid = " + totalPaid + ' USDT');
-                    //console.log("Total paid:", totalPaid);
-                    //return totalPaid;
-                }
+            if (!result.success) {
+                showToast("Failed to load total paid: " + (result.error || "unknown"));
+                return null;
+            } else {
+                const totalPaid = result.data.totalPaid;
+                $("#totalBonusPaid").html("Total bonus paid = " + totalPaid + ' ' + 'USDT');
+                //console.log("Total paid:", totalPaid);
+                //return totalPaid;
+            }
         } catch (err) {
             console.log("getTotalUSDTPaid failed:", err.message);
             showToast("Could not reach server." + err.message);
@@ -352,7 +356,7 @@ const wagmiConfig = createConfig({
 
             $("#stakingsTxTable").html(stakingData);
 
-            
+            $("#total-commission-tab").html("");
 
         }  else{
             $("#stakingsTxTable").html('<tr><td colspan="4" style="text-align: center;">No Data Found.</td></tr>');
@@ -492,7 +496,6 @@ const wagmiConfig = createConfig({
 
     }
     async function getCommissionTxs(){
-
          
         if(refereeComiData.length>0){
              var commData ="";
