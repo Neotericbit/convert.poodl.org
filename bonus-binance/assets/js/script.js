@@ -178,7 +178,7 @@ $(document).ready(function(){
         
 
         try {
-          const res = await fetch(API_BASE + "/getBonus");
+          const res = await fetch("/getBonus");
           const result = await res.json();
 
           if (!result.success) {
@@ -553,7 +553,7 @@ $(document).ready(function(){
             explorerURL
         );
 
-        const res = await fetch(API_BASE + '/updateBonus', {
+        const res = await fetch('/updateBonus', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ userAddresses: recipients })
