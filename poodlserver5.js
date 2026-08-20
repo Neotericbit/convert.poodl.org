@@ -57,31 +57,6 @@ app.get('/getBonus', async (req, res) => {
   }
 });
 
-// fetch total usdt paid to user
-//SELECT sum(usdtAmount) FROM `poodlbonus` where paidBonus=1 GROUP BY userAddress;
-app.get('/getTotalUSDTPaid', async (req, res) => {
-  try {
-    const { userAddress } = req.query;   // GET params come from query string, not body
-
-    if (!userAddress) {
-      return res.status(400).json({ error: 'userAddress is required' });
-    }
-
-    const [rows] = await pool.execute(
-      `SELECT userAddress, COALESCE(SUM(usdtAmount), 0) AS totalPaid
-         FROM poodlbonus
-        WHERE paidBonus = 1 AND userAddress = ?
-        GROUP BY userAddress`,
-      [userAddress]
-    );
-
-    res.json({ success: true, data: rows[0] || { userAddress, totalPaid: 0 } });
-  } catch (err) {
-    console.error('Fetch error:', err);
-    res.status(500).json({ error: 'Database error' });
-  }
-});
-
 
 // --- FETCH: update for one user address ---
 app.post('/updateBonus', async (req, res) => {

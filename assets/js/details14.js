@@ -197,11 +197,6 @@ const wagmiConfig = createConfig({
        
           refereeCommission =  Number(refereeCommission) / Math.pow(10, decimals)
           refereeCommission = refereeCommission.toFixed(7);
-
-
-          var strTotals ="";
-            strTotals += 'Total Commission : '+refereeCommission +' ' +symbol  
-            $("#total-commission-tab").html(strTotals);
           
           refereeComiData = await readContract({
             address: PoodlReferralContractAddress,
@@ -227,38 +222,6 @@ const wagmiConfig = createConfig({
       }
 
     }
-
-     async function getTotalUSDTPaid(userAddr) {
-
-        try {
-
-                if(userAddr == undefined || userAddr == null)
-                {
-                    alertify.alert('Warning',"Please connect Metamask");
-                    return;
-                }
-                
-
-            const res = await fetch("/getTotalUSDTPaid?userAddress=" + encodeURIComponent(userAddr));
-            const result = await res.json();
-
-            if (!result.success) {
-                showToast("Failed to load total paid: " + (result.error || "unknown"));
-                return null;
-            } else {
-                const totalPaid = result.data.totalPaid;
-                $("#totalBonusPaid").html("Total bonus paid = " + totalPaid + ' ' +symbol);
-                //console.log("Total paid:", totalPaid);
-                //return totalPaid;
-            }
-        } catch (err) {
-            console.log("getTotalUSDTPaid failed:", err.message);
-            showToast("Could not reach server." + err.message);
-            return null;
-        }
-    }
-
-    getTotalUSDTPaid(useraddress);
 
     function fromWei(weiValue, decimals) {
       let v = BigInt(weiValue);              // accepts bigint, string, or number
@@ -306,6 +269,24 @@ const wagmiConfig = createConfig({
       }
 
     init();
+
+
+    $('#claimall').click(async function(){
+
+        if(parseFloat(refereeCommission)< parseFloat(minCommission)) {
+             alertify.alert('Warning',"You need minimum commission "+ parseFloat(minCommission) + " " +symbol+" to claim");
+              return;
+        }
+        var pIds =  $("#hPurIds").val() ;
+        var idArray = pIds.split(',').map(id => Number(id.trim()));
+         // Convert to array of numbers
+        // var pidArray = pIds.split(',').map(id => BigInt(id.trim()));
+
+        await processTx(PoodlReferralContractAddress,memberShipRefCodeABI,'claimSpecificCommissions',Array(idArray),0,explorerURL);
+        await init();
+                 
+    });
+
 
     async function getstakingTxs(){
  
@@ -495,105 +476,103 @@ const wagmiConfig = createConfig({
 
     }
     async function getCommissionTxs(){
+
          
-        if(refereeComiData.length>0){
-             var commData ="";
-             var purIds = "";
-             var amtCnt =0;
-            for (var i = 0; i < refereeComiData.length; i++) {
+            if(refereeComiData.length>0){
+                 var commData ="";
+                 var purIds = "";
+                 var amtCnt =0;
+                for (var i = 0; i < refereeComiData.length; i++) {
 
-                var commamount = refereeComiData[i].amount;
-                 
-                commamount =  Number(commamount) / Math.pow(10, decimals)
-                commamount = commamount.toFixed(7);
-                var commissionTD= "";
-
-                 if(refereeComiData[i].claimed==false){
-                      if(amtCnt==0)
-                      {
-                          purIds = refereeComiData[i].purchaseId;
-                      }
-                      else
-                      {
-                          purIds += "," + refereeComiData[i].purchaseId;
-                      }
-
-                      amtCnt++;
-                      commissionTD='<td><a href="#" type="button" class="claimcommission" data-id="'+refereeComiData[i].purchaseId+'"><i   aria-hidden="true">Claim Commission</i></a></td> ';
-                    } else {
-                      commissionTD ='<td> <i   aria-hidden="true">Commission Claimed</i></td> ';
-                    }
+                    var commamount = refereeComiData[i].amount;
                      
-                 
+                    commamount =  Number(commamount) / Math.pow(10, decimals)
+                    commamount = commamount.toFixed(7);
+                    var commissionTD= "";
+
+                     if(refereeComiData[i].claimed==false){
+                          if(amtCnt==0)
+                          {
+                              purIds = refereeComiData[i].purchaseId;
+                          }
+                          else
+                          {
+                              purIds += "," + refereeComiData[i].purchaseId;
+                          }
+
+                          amtCnt++;
+                          commissionTD='<td><a href="#" type="button" class="claimcommission" data-id="'+refereeComiData[i].purchaseId+'"><i   aria-hidden="true">Claim Commission</i></a></td> ';
+                        } else {
+                          commissionTD ='<td> <i   aria-hidden="true">Commission Claimed</i></td> ';
+                        }
+                         
+                     
                     commData+='<tr>'+
-                            '<td>'+commamount+' ' +symbol+'</td>'+
-                            '<td> '+solidityTimestampToDate(refereeComiData[i].commDate)+' </td>'+
-                            commissionTD+
-                        '</tr>';
+                                '<td>'+commamount+' ' +symbol+'</td>'+
+                                '<td> '+solidityTimestampToDate(refereeComiData[i].commDate)+' </td>'+
+                                commissionTD+
+                            '</tr>';
 
-              }
-              
+                  }
+                  
 
-              $("#hPurIds").val(purIds);
+                  $("#hPurIds").val(purIds);
 
-              $("#commissionTable").html(commData);
-
-
-        }  else{
-
-            $("#total-commission-tab").html("Total Commission : 0.0000"+' ' +symbol);
-            $("#commissionTable").html('<tr><td colspan="3" style="text-align: center;">No Data Found.</td></tr>');
-        }
+                  $("#commissionTable").html(commData);
 
 
-        $('.claimcommission').click(async function(){
-            var pid = $(this).data("id");
+            }  else{
 
-            if(parseFloat(refereeCommission)< parseFloat(minCommission)) {
-              alertify.alert('Warning',"You need minimum commission "+ parseFloat(minCommission) + " " +symbol+" to claim");
-              return;
+                $("#total-commission-tab").html("Total Commission : 0.0000"+' ' +symbol);
+                $("#commissionTable").html('<tr><td colspan="3" style="text-align: center;">No Data Found.</td></tr>');
             }
 
-            try {
 
-              processTx(PoodlReferralContractAddress,memberShipRefCodeABI,'claimSpecificCommissions',Array([pid]),0,explorerURL);
-                setTimeout(init,2000);
+            $('.claimcommission').click(async function(){
+                var pid = $(this).data("id");
 
-            }catch (error) {
-
-              // Try to extract revert message
-              let errorMessage = "Unknown error";
-
-              if (error.message && error.message.includes("reverted with the following reason:")) {
-                const split = error.message.split("reverted with the following reason:");
-                if (split.length > 1) {
-                  errorMessage = split[1].trim().split("Contract Call:")[0].trim();
+                if(parseFloat(refereeCommission)< parseFloat(minCommission)) {
+                  alertify.alert('Warning',"You need minimum commission "+ parseFloat(minCommission) + " " +symbol+" to claim");
+                  return;
                 }
-              } else if (error.message) {
-                errorMessage = error.message;
+
+                try {
+
+                  processTx(PoodlReferralContractAddress,memberShipRefCodeABI,'claimSpecificCommissions',Array([pid]),0,explorerURL);
+                    setTimeout(init,2000);
+
+                }catch (error) {
+
+                  // Try to extract revert message
+                  let errorMessage = "Unknown error";
+
+                  if (error.message && error.message.includes("reverted with the following reason:")) {
+                    const split = error.message.split("reverted with the following reason:");
+                    if (split.length > 1) {
+                      errorMessage = split[1].trim().split("Contract Call:")[0].trim();
+                    }
+                  } else if (error.message) {
+                    errorMessage = error.message;
+                  }
+
+                  alertify.alert("Warning" , errorMessage);
               }
 
-              alertify.alert("Warning" , errorMessage);
-          }
-        });
-            
+            });
     }
 
-    $('#claimall').click(async function(){
-
-        if(parseFloat(refereeCommission)< parseFloat(minCommission)) {
-             alertify.alert('Warning',"You need minimum commission "+ parseFloat(minCommission) + " " +symbol+" to claim");
-              return;
-        }
-        var pIds =  $("#hPurIds").val() ;
-        var idArray = pIds.split(',').map(id => Number(id.trim()));
-         // Convert to array of numbers
-        // var pidArray = pIds.split(',').map(id => BigInt(id.trim()));
-
-        await processTx(PoodlReferralContractAddress,memberShipRefCodeABI,'claimSpecificCommissions',Array(idArray),0,explorerURL);
-        await init();
-                 
+    $('#pills-commission-tab').click(async function(){
+        var strTotals ="";
+        strTotals += 'Total Commission : <span id="totalCommAmt">'+refereeCommission +' ' +symbol  + ' '+ '<button type="button" class="btn btn-outline-danger staking-pink" id="claimall" >Claim Total Commission</button>'+' </span>'
+        $("#total-commission-tab").html(strTotals);
     });
+    $('#pills-reward-tab').click(async function(){
+        $("#total-commission-tab").html('');
+    });
+    $('#pills-stake-tab').click(async function(){
+        $("#total-commission-tab").html('');
+    });
+
 
     $('#btnwithdraw').click(async function(){
         const account = getAccount();
