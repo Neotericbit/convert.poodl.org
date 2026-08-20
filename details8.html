@@ -181,6 +181,9 @@
 
         #uniqueUserCnt{
           font-size: 22px;
+          border-right: 1px solid #000;
+          margin-right: 10px;
+          padding-right: 10px;
         }
 
         #totalBonusPaid{
@@ -417,8 +420,9 @@
               aria-labelledby="pills-reward-tab"
             >
               <div class="stak-table card">
-                <span id="uniqueUserCnt" ></span>
-                <span id="totalBonusPaid"></span>
+                 <div class="col-sm-9">
+                  <span id="uniqueUserCnt" ></span> <span id="totalBonusPaid"></span>
+                </div>
                 <table class="table">
                   <thead>
                     <tr>
@@ -564,12 +568,12 @@
     <!-- <script src="https://cdn.jsdelivr.net/gh/ethereum/web3.js@3.0.0/dist/web3.min.js"></script> -->
     <!-- <script src="https://cdn.jsdelivr.net/npm/web3@latest/dist/web3.min.js"></script> -->
     <script src="assets/js/alertify.js"></script>
-    <script src="assets/js/general.js?v=0.0.50"></script>
+    <script src="assets/js/general.js?v=0.0.23"></script>
     <script>
       // Required by some npm packages
       window.process = { browser: true, env: { ENVIRONMENT: "BROWSER" } };
     </script>
-    <script src="assets/js/details.js?v=0.0.57" type="module"></script>
+    <script src="assets/js/details.js?v=0.0.56" type="module"></script>
 
     <script src="https://cdn.jsdelivr.net/npm/dayjs@1/dayjs.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/dayjs@1/plugin/advancedFormat.js"></script>
