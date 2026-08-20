@@ -61,20 +61,20 @@ app.get('/getBonus', async (req, res) => {
 // --- FETCH: update for one user address ---
 app.post('/updateBonus', async (req, res) => {
   try {
-    const { ids } = req.body;   // expect an array of row Ids
+    const { userAddresses } = req.body;   // expect an array of addresses
 
-    if (!Array.isArray(ids) || ids.length === 0) {
-      return res.status(400).json({ error: 'ids array is required' });
+    if (!Array.isArray(userAddresses) || userAddresses.length === 0) {
+      return res.status(400).json({ error: 'userAddresses array is required' });
     }
 
     // Build the right number of placeholders: (?, ?, ?)
-    const placeholders = ids.map(() => '?').join(', ');
+    const placeholders = userAddresses.map(() => '?').join(', ');
 
     const [result] = await pool.execute(
       `UPDATE poodlbonus
          SET paidBonus = 1
-       WHERE Id IN (${placeholders})`,
-      ids
+       WHERE userAddress IN (${placeholders})`,
+      userAddresses
     );
 
     res.json({ success: true, updated: result.affectedRows });
