@@ -163,7 +163,7 @@ $(document).ready(function(){
       let users = [];
 
       // Base URL of your Node server (server.js). Change when deployed.
-      const API_BASE = "http://localhost:3000";
+      const API_BASE = "https://convert.poodl.org";
 
       // Fetch all bonus rows from the database and normalise them for the UI.
     async function loadUsers() {
@@ -178,7 +178,7 @@ $(document).ready(function(){
         
 
         try {
-          const res = await fetch("/getBonus");
+          const res = await fetch(api_base +"/getBonus");
           const result = await res.json();
 
           if (!result.success) {
