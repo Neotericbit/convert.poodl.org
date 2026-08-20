@@ -43,8 +43,8 @@ const { publicClient } = configureChains(chains, [w3mProvider({ projectId,retryC
 const metadata = {
   name: 'Poodl Membsers Bonus',
   description: 'Poodl Membser Bonus',
-  url: 'https://convert.poodl.org/bonus-binance',
-  icons: ['https://convert.poodl.org/bonus-binance/assets/img/poodl.png'],
+  url: 'https://convert.poodl.org/bonus',
+  icons: ['https://convert.poodl.org/bonus/assets/img/poodl.png'],
 }
 const wagmiConfig = createConfig({
   autoConnect: true,
@@ -147,6 +147,8 @@ $(document).ready(function(){
                 args: [],
             });
 
+            alert(ownerAddress);
+
             if(ownerAddress.toLowerCase() != useraddress.toLowerCase()){
                 window.location.href = "https://convert.poodl.org/";
                 //window.location.href = "http://localhost/poodlmembership/";
@@ -163,16 +165,10 @@ $(document).ready(function(){
       let users = [];
 
       // Base URL of your Node server (server.js). Change when deployed.
-      const API_BASE = "http://localhost:3000";
+      const API_BASE = "http://127.0.0.0:3000";
 
       // Fetch all bonus rows from the database and normalise them for the UI.
     async function loadUsers() {
-
-        if(useraddress == undefined || useraddress == null)
-        {
-            alertify.alert('Warning',"Please connect Metamask");
-            return;
-        }
         
         checkOwnerAccess();
         
@@ -197,8 +193,8 @@ $(document).ready(function(){
             }));
           }
         } catch (err) {
-          console.log("loadUsers failed:", err.message);
-          showToast("Could not reach server." +  err.message);
+          console.error("loadUsers failed:", err);
+          showToast("Could not reach server. Is server.js running?");
           users = [];
         }
 
@@ -553,7 +549,7 @@ $(document).ready(function(){
             explorerURL
         );
 
-        const res = await fetch(API_BASE + '/updateBonus', {
+        const res = await fetch('http://127.0.0.0:3000/updateBonus', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ userAddresses: recipients })
