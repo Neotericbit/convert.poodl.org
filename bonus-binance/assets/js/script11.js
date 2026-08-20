@@ -270,12 +270,12 @@ $(document).ready(function(){
         ).length;
 
         // usdtAmount is a string (possibly a huge uint256), so sum with BigInt.
-        var totalUsdt = 0;
+        let totalUsdt = 0n;
         users
           .filter((user) => user.status === "Paid")
           .forEach((user) => {
             try {
-              totalUsdt += Number(user.usdtAmount);
+              totalUsdt += BigInt(user.usdtAmount);
             } catch (e) {
               /* skip non-numeric */
             }
@@ -394,10 +394,10 @@ $(document).ready(function(){
       const selected = users.filter((user) => selectedUsers.has(user.id));
 
       // total USDT (uint256 strings -> BigInt)
-      var totalAmount = 0;
+      let totalAmount = 0n;
       selected.forEach((user) => {
         try {
-          totalAmount += Number(user.usdtAmount);
+          totalAmount += BigInt(user.usdtAmount);
         } catch (e) {
           /* skip non-numeric */
         }
@@ -473,17 +473,16 @@ $(document).ready(function(){
     function openConfirmModal(type) {
         const selected = users.filter((user) => selectedUsers.has(user.id));
 
-        var totalAmount = 0;
+        let totalAmount = 0n;
         selected.forEach((user) => {
-          
           try {
-            totalAmount += Number( user.usdtAmount);
+            totalAmount += BigInt(user.usdtAmount);
           } catch (e) {
             /* skip non-numeric */
           }
         });
 
-         if (selected.length === 0) {
+        if (selected.length === 0) {
           showToast("Please select at least one user.");
           return;
         }
@@ -536,12 +535,12 @@ $(document).ready(function(){
         // build the three inputs for batchTransfer
         const recipients = [];
         const amounts = [];
-        var expectedTotal = 0;
+        let expectedTotal = 0n;
 
         selected.forEach((user) => {
             recipients.push(user.wallet);          // userAddress
             amounts.push(user.usdtAmount);         // uint256 as string
-            expectedTotal += Number(user.usdtAmount);
+            expectedTotal += BigInt(user.usdtAmount);
         });
 
         // batchTransfer(recipients, amounts, expectedTotal)
