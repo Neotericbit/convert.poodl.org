@@ -92,7 +92,7 @@ $(document).ready(function(){
 
       const userTable = document.getElementById("userTable");
       const mobileList = document.getElementById("mobileList");
-      const searchInput = document.getElementById("searchInput1");
+      const searchInput = document.getElementById("searchInput");
       const statusFilter = document.getElementById("statusFilter");
       const selectAll = document.getElementById("selectAll");
 
