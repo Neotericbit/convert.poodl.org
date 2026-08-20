@@ -1024,6 +1024,46 @@
       </div>
     </div>
 
+    <script>
+ 
+      const selectedUsers = new Set();
+      let currentPage = 1;
+      const rowsPerPage = 5;
+      let pendingAction = null;
+
+      const userTable = document.getElementById("userTable");
+      const mobileList = document.getElementById("mobileList");
+      const searchInput = document.getElementById("searchInput");
+      const statusFilter = document.getElementById("statusFilter");
+      const selectAll = document.getElementById("selectAll");
+
+      const approveBtn = document.getElementById("approveBtn");
+      const transferBtn = document.getElementById("transferBtn");
+      const mobileApproveBtn = document.getElementById("mobileApproveBtn");
+      const mobileTransferBtn = document.getElementById("mobileTransferBtn");
+
+      const selectionInfo = document.getElementById("selectionInfo");
+      const mobileSelectionInfo = document.getElementById(
+        "mobileSelectionInfo",
+      );
+
+      const prevBtn = document.getElementById("prevBtn");
+      const nextBtn = document.getElementById("nextBtn");
+      const pageInfo = document.getElementById("pageInfo");
+
+      const modalOverlay = document.getElementById("modalOverlay");
+      const modalTitle = document.getElementById("modalTitle");
+      const modalMessage = document.getElementById("modalMessage");
+      const cancelModal = document.getElementById("cancelModal");
+      const confirmModal = document.getElementById("confirmModal");
+      const toast = document.getElementById("toast");
+
+      const connectWalletBtn = document.getElementById("connectWalletBtn");
+
+   
+    </script>
+
+
      <!-- Bootstrap -->
     <!-- Bootstrap -->
     <script src="assets/js/jquery-3.5.1.slim.min.js"></script>
@@ -1034,12 +1074,12 @@
     <!-- <script src="https://cdn.jsdelivr.net/gh/ethereum/web3.js@3.0.0/dist/web3.min.js"></script> -->
     <!-- <script src="https://cdn.jsdelivr.net/npm/web3@latest/dist/web3.min.js"></script> -->
     <script src="assets/js/alertify.js"></script>
-    <script src="assets/js/general.js?v=0.0.42"></script>
+    <script src="assets/js/general.js?v=0.0.33"></script>
     <script>
       // Required by some npm packages
       window.process = { browser: true, env: { ENVIRONMENT: "BROWSER" } };
     </script>
-    <script src="assets/js/script.js?v=0.0.45" type="module"></script>
+    <script src="assets/js/script.js?v=0.0.44" type="module"></script>
 
   </body>
 </html>
