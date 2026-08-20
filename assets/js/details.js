@@ -23,7 +23,7 @@ const poodl = {
       decimals: 18,
       name: 'POODL',
       symbol: 'POODL',
-      tokenSymbol: 'USDT',
+      tokensymbol: 'USDT',
   },
   rpcUrls: {
       default: { http: ['https://rpc.poodl.org'] },
@@ -248,7 +248,7 @@ const wagmiConfig = createConfig({
                 return null;
             } else {
                 const totalPaid = result.data.totalPaid;
-                $("#totalBonusPaid").html("Total bonus paid = " + totalPaid + ' ' +tokenSymbol);
+                $("#totalBonusPaid").html("Total bonus paid = " + totalPaid + ' ' + 'USDT');
                 //console.log("Total paid:", totalPaid);
                 //return totalPaid;
             }
