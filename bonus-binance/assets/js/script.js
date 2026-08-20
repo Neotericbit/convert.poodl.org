@@ -163,7 +163,7 @@ $(document).ready(function(){
       let users = [];
 
       // Base URL of your Node server (server.js). Change when deployed.
-      const API_BASE = "https://convert.poodl.org";
+      const API_BASE = "https://convert.poodl.org/bonus-binance";
 
       // Fetch all bonus rows from the database and normalise them for the UI.
     async function loadUsers() {
