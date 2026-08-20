@@ -540,7 +540,7 @@ $(document).ready(function(){
 
         selected.forEach((user) => {
             recipients.push(user.wallet);          // userAddress
-            amounts.push(user.usdtAmount.toString());         // uint256 as string
+            amounts.push(user.usdtAmount);         // uint256 as string
             expectedTotal += Number(user.usdtAmount);
         });
 
