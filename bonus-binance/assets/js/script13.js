@@ -538,14 +538,9 @@ $(document).ready(function(){
         const amounts = [];
         var expectedTotal = 0;
 
-        
-
         selected.forEach((user) => {
-
-            const rawUSDTAmount = toRawAmount(user.usdtAmount.toString(), decimals);
-
             recipients.push(user.wallet);          // userAddress
-            amounts.push(rawUSDTAmount.toString());         // uint256 as string
+            amounts.push(user.usdtAmount.toString());         // uint256 as string
             expectedTotal += Number(user.usdtAmount);
         });
 
@@ -576,17 +571,6 @@ $(document).ready(function(){
 
         // after the transfer, reload data so statuses refresh
         loadUsers();
-    }
-
-    function toRawAmount(amountStr, decimals) {
-      // Splits "34.4527496" into whole = "34", frac = "4527496"
-      let [whole, frac = ""] = amountStr.toString().split(".");
-
-      // Pad or trim the fractional part to exactly `decimals` digits
-      frac = frac.padEnd(decimals, "0").slice(0, decimals);
-
-      // Combine as a single integer string, then convert to BigInt
-      return BigInt(whole + frac);
     }
 
     function confirmAction() {
