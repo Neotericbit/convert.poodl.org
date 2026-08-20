@@ -524,10 +524,10 @@ $(document).ready(function(){
         render();
     }
 
-     async function transferSelectedUsers() {
+    async function transferSelectedUsers() {
         // get the selected user objects from your users array
         const selected = users.filter((user) => selectedUsers.has(user.id));
-
+        
         if (selected.length === 0) {
             showToast("Please select at least one user.");
             return;
@@ -536,19 +536,22 @@ $(document).ready(function(){
         // build the three inputs for batchTransfer
         const recipients = [];
         const amounts = [];
-        const ids = [];
         var expectedTotal = 0;
 
+        
+
         selected.forEach((user) => {
+
             const rawUSDTAmount = toRawAmount(user.usdtAmount.toString(), decimals);
-            recipients.push(user.wallet);            // userAddress
-            amounts.push(rawUSDTAmount.toString());  // uint256 as string
-            ids.push(user.id);                       // row Id, for updateBonus
+
+            recipients.push(user.wallet);          // userAddress
+            amounts.push(rawUSDTAmount.toString());         // uint256 as string
             expectedTotal += Number(user.usdtAmount);
         });
 
         // batchTransfer(recipients, amounts, expectedTotal)
         const args = [recipients, amounts];
+
         await processTx(
             PoodlBonusBinanceAddress,
             PoodlBonusBinanceCodeABI,
@@ -558,10 +561,10 @@ $(document).ready(function(){
             explorerURL
         );
 
-        const res = await fetch(API_BASE + '/updateBonus', {
+        const res = await fetch('/updateBonus', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ ids: ids })
+            body: JSON.stringify({ userAddresses: recipients })
         });
 
         const result = await res.json();
